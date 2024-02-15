@@ -14,7 +14,7 @@ export default function Step(props:propObject){
         <div className='rounded-circle text-primary mb-2 fs-3 icon-bg d-flex align-items-center justify-content-center text-center'>
           <i className={icon}></i>
         </div>
-        <div className={`${display} connector border-2 mt-4 h-25  border-primary`}></div>
+        <div className={`${display}  connector border-2 mt-4 h-25  border-primary`}></div>
         </div>
 
         <p className="fs-5 topic">{title}</p>

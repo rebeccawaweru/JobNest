@@ -15,9 +15,15 @@ $fontWeight:400;
 }
 footer {
     background-color: $darkBlue;
+    font-size: .9rem;
 
     .group{
-        margin-right: 8%;
+        width: 78%;
+       justify-content: space-around;
+    }
+    
+    .jobnest {
+        width: 45%;
     }
 }
 
@@ -56,10 +62,9 @@ h1{
     
 }
 .avatar {
-    height: 10vh;
-    width: 38%;
+    height: 8vh;
+    width: 40%;
     object-fit: fill;
-
 }
 .image {
     height: 94%;
@@ -68,10 +73,11 @@ h1{
     height: 40vh;
     width: 100%;
     font-weight: $fontWeight;
-    margin-top: -2%;
+    // margin-top: -2%;
 }
-.stat {
-    border-left: 1px solid wheat;
+
+.custom {
+    border-right: none;
 }
 
 @mixin breakpoint($width){
@@ -98,6 +104,30 @@ li{
         margin-top: 0px;
         @include breakpoint($width:100%);
     }
+    .avatar {
+        width: 60%;
+    }
+    .stats {
+        height: auto;
+        margin-top: 12%;
+
+    }
+    .stat {
+        border-left:none;
+    }
+    .step > div{
+        margin-left:0px;
+    }
+    footer {
+        .group{
+            width: 100%;
+            justify-content:space-between;
+        }
+        .jobnest {
+            width: 100%;
+        }
+    }
+
 }
 // Small devices (landscape phones, 576px and up)
 @media (min-width: $sm) { 
@@ -109,6 +139,22 @@ li{
         margin-top: 0px;
         @include breakpoint($width:100%);
     }
+    .stat {
+        border-left:none;
+    }
+    .step > div{
+        margin-left:0px;
+    }
+    footer {
+        .group{
+            width: 100%;
+            justify-content:space-between;
+        }
+        .jobnest {
+            width: 100%;
+        }
+    }
+   
 }
 
 // Medium devices (tablets, 768px and up)
@@ -119,6 +165,25 @@ li{
     .content {
         margin-top: 0px;
         @include breakpoint($width:100%);
+    }
+    .stat {
+        border-right: 1px solid wheat;
+    }
+    .step > div{
+        margin-left:100px;
+    }
+    footer {
+        background-color: $darkBlue;
+        font-size: .9rem;
+    
+        .group{
+            width: 78%;
+            justify-content: space-around;
+        }
+        
+        .jobnest {
+            width: 45%;
+        }
     }
 }
 
@@ -134,7 +199,22 @@ li{
     .content {
         margin-top: 50px;
     }
-
+    .stat {
+        border-right: 1px solid wheat;
+    }
+    .step > div{
+        margin-left:100px;
+    }
+    footer {
+        .group{
+            width: 78%;
+            justify-content: space-around;
+        }
+        
+        .jobnest {
+            width: 45%;
+        }
+    }
 }
 
 // X-Large devices (large desktops, 1200px and up)
@@ -145,7 +225,23 @@ li{
     .content {
         margin-top: 50px;
     }
-
+    .stat {
+        border-right: 1px solid wheat;
+    }
+    .step > div{
+        margin-left:100px;
+    }
+    footer {
+   
+        .group{
+            width: 78%;
+            justify-content: space-around;
+        }
+        
+        .jobnest {
+            width: 45%;
+        }
+    }
 }
 
 // XX-Large devices (larger desktops, 1400px and up)

@@ -1,10 +1,11 @@
-import { Stack, Form, Button,InputGroup } from "react-bootstrap";
+import { Stack, Form, Button,InputGroup, Container } from "react-bootstrap";
 
 export default function Footer(){
     return (
     <footer>
-    <div className="d-flex justify-content-center px-5 pt-2 align-items-center text-left  text-white">
-      <div className="w-50 group">
+    <Container className="d-grid  gap-4 gap-lg-0 gap-md-0 d-lg-flex d-md-flex justify-content-center  pt-2 align-items-center text-left  text-white">
+      
+      <div className="jobnest ">
          <p className="fs-2">JOBNEST</p>
          <p className="text-secondary">It is a long established fact that is  the read will been distractend there and readable an important content.</p>
          <p>Find Us On:</p>
@@ -16,7 +17,9 @@ export default function Footer(){
          </Stack>
       </div>
 
-      <div className="group w-25 ">
+      <div className="d-flex  group">
+
+      <div className=" mx-0 mx-lg-2 mx-md-2 ">
       <p className="fs-5">Quick Links</p>
       <div className="d-grid gap-2">
         <li><i className="bi bi-chevron-double-right"></i> Job Packages</li>
@@ -27,7 +30,7 @@ export default function Footer(){
       </div>
       </div>
 
-      <div className="group w-25">
+      <div className=" ">
       <p className="fs-5">For Candidates</p>
       <div className="d-grid gap-2">
         <li><i className="bi bi-chevron-double-right"></i> User Dashboard</li>
@@ -37,8 +40,9 @@ export default function Footer(){
         <li><i className="bi bi-chevron-double-right"></i> Candidates Login</li>
       </div>
       </div>
+      </div>
 
-      <div className="mt-4">
+      <div className="mt-4 mx-2">
       <p className="fs-5">Get In Touch</p>
       <p className="text-secondary">Fusce varius, dolor tempor interdum tristiquei bibendum service life.</p>
       <InputGroup className=" mb-3 border rounded-pill text-center p-2  ">
@@ -47,12 +51,12 @@ export default function Footer(){
       </InputGroup>
       <Button className="rounded-pill p-3 button" variant="primary">Subscribe Now<i className="bi bi-chevron-double-right"></i></Button>
       </div>
-    </div>
+    </Container>
     <hr className="border"/>
-    <div className="d-flex justify-content-between text-secondary fs-6  px-5">
+    <Container className="d-grid d-lg-flex d-md-flex justify-content-center justify-content-lg-between justify-content-md-between text-secondary ">
         <p>JobNest | Developed by: alx-students</p>
         <p>© JobNest 2024 | All Right Reserved</p>
-    </div>
+    </Container>
     </footer>
     )
 }

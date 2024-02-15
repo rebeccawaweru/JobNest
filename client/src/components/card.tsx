@@ -9,7 +9,7 @@ interface propObject {
 function JobCard(props:propObject) {
   const {icon,title,jobs} = props
   return (
-    <Card className='d-block text-left align-items-center justify-content-center p-4 mx-1' style={{ width: '18rem' }}>
+    <Card className='d-block text-left align-items-center justify-content-center p-4 mx-1 w-100'>
      <Card.Text  className='rounded-circle text-primary fs-4 icon-bg d-flex align-items-center justify-content-center text-center border '>
      <i className={`${icon}`}></i>
      </Card.Text>
