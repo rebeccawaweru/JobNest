@@ -10,8 +10,8 @@ function JobCard(props:propObject) {
   const {icon,title,jobs} = props
   return (
     <Card className='d-block text-left align-items-center justify-content-center p-4 mx-1' style={{ width: '18rem' }}>
-     <Card.Text  className='rounded-circle text-primary mx-2 mt-4 mb-4 fs-2'>
-     <i className={`${icon} border rounded-circle p-4`}></i>
+     <Card.Text  className='rounded-circle text-primary fs-4 icon-bg d-flex align-items-center justify-content-center text-center border '>
+     <i className={`${icon}`}></i>
      </Card.Text>
       <Card.Body >
         <Card.Title className='fs-4 mt-4'>{title}</Card.Title>

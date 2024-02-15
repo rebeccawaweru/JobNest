@@ -1,8 +1,11 @@
 @import "_breakpoint";
 
 $myBlue:#0f2339;
-$largeFont:56px;
+$darkBlue:#0F1B31;
 
+$light:#D2E4F9;
+$largeFont:56px;
+$fontWeight:400;
 .search {
     font-size: small;
 }
@@ -10,25 +13,65 @@ $largeFont:56px;
 .button:hover{
     background-color: $myBlue;
 }
+footer {
+    background-color: $darkBlue;
+
+    .group{
+        margin-right: 8%;
+    }
+}
 
 
+@mixin icon-bg {
+    height: 100px;
+    width: 100px;
+}
+.icon-bg {
+    @include icon-bg
+}
+.input::placeholder{
+   color: white;
+}
+.step .icon-bg {
+    background-color: $light;
+    @include icon-bg;
+    margin-left: -15px;
+}
+.icn {
+    background-color: $myBlue;
+
+}
+.step > div{
+    width:100%;
+    margin-left:100px;
+    display:relative
+}
+.connector{
+    width:75%;
+    display: absolute;
+}
 h1{
     font-size: $largeFont;
     color: $myBlue;
+    
 }
 .avatar {
     height: 10vh;
     width: 38%;
     object-fit: fill;
 
-
 }
 .image {
     height: 94%;
 }
-.banner2{
-    height: 90vh;
-    width: 90%;
+.stats {
+    height: 40vh;
+    width: 100%;
+    font-weight: $fontWeight;
+    margin-top: -2%;
+}
+.stat {
+    border-left: 1px solid wheat;
 }
 
 @mixin breakpoint($width){
@@ -42,6 +85,9 @@ h1{
     @include textColor
 }
 
+li{
+    list-style: none;
+}
 
 @media (max-width: $sm) { 
     .button{
