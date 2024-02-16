@@ -1,0 +1,5 @@
+export {default as Introduction} from './introduction'
+export {default as Categories} from './categories'
+export {default as About} from './about'
+export {default as Statistics} from './statistics'
+export {default as JobProcess} from './process'

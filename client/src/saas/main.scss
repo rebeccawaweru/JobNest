@@ -6,10 +6,19 @@ $darkBlue:#0F1B31;
 $light:#D2E4F9;
 $largeFont:56px;
 $fontWeight:400;
+$bg:url('../assets/images/auth-bg.jpg');
+
 .search {
     font-size: small;
 }
-
+.container{
+    width: 100%;
+}
+.auth-bg {
+    background-image: $bg;
+    height: 70vh;
+    background-position: 100% 0%;
+}
 .button:hover{
     background-color: $myBlue;
 }
@@ -54,17 +63,24 @@ footer {
 }
 .connector{
     width:75%;
-    display: absolute;
 }
 h1{
     font-size: $largeFont;
     color: $myBlue;
-    
+}
+h2 {
+    font-size: 55px;
+    line-height: 70px;
 }
 .avatar {
     height: 8vh;
     width: 40%;
-    object-fit: fill;
+    object-fit: contain;
+}
+.frontimage {
+    height: 85vh;
+    width: 80%;
+    margin-top: 20px;
 }
 .image {
     height: 94%;
@@ -145,9 +161,13 @@ li{
     .step > div{
         margin-left:0px;
     }
+    .avatar {
+        width: 40%;
+        object-fit: contain;
+    }
     footer {
         .group{
-            width: 100%;
+            width: 60%;
             justify-content:space-between;
         }
         .jobnest {
@@ -170,7 +190,11 @@ li{
         border-right: 1px solid wheat;
     }
     .step > div{
-        margin-left:100px;
+        margin-left:0px;
+    }
+    .avatar {
+        width: 30%;
+        object-fit: contain;
     }
     footer {
         background-color: $darkBlue;
@@ -185,6 +209,7 @@ li{
             width: 45%;
         }
     }
+
 }
 
 // Large devices (desktops, 992px and up)
@@ -205,6 +230,10 @@ li{
     .step > div{
         margin-left:100px;
     }
+    .avatar {
+        width: 50%;
+        object-fit: contain;
+    }
     footer {
         .group{
             width: 78%;
@@ -214,6 +243,14 @@ li{
         .jobnest {
             width: 45%;
         }
+    }
+    .container {
+        width: 100%;
+    }
+    .frontimage {
+        height: 80vh;
+        width: 100%;
+object-fit: contain;
     }
 }
 
@@ -231,6 +268,10 @@ li{
     .step > div{
         margin-left:100px;
     }
+    .avatar {
+        width: 40%;
+        object-fit: contain;
+    }
     footer {
    
         .group{
@@ -242,7 +283,25 @@ li{
             width: 45%;
         }
     }
+    .frontimage {
+        height: 80%;
+        width: 100%;
+    object-fit: contain;
+    }
 }
 
 // XX-Large devices (larger desktops, 1400px and up)
-// @media (min-width: 1400px) { ... }
+@media (min-width: 1400px) { 
+    .avatar {
+        width: 30%;
+    }
+    .step > div{
+        margin-left:0px;
+    }
+    .frontimage {
+        height: 85vh;
+        width: 85%;
+        object-fit: contain;
+    }
+}
+

@@ -2,7 +2,7 @@ import { Container, Navbar, Nav, Button } from "react-bootstrap";
 export default function NavBar(){
     return (
         <Navbar expand="lg" className="justify-content-between bg-white font-sans"  sticky="top"  >
-        <Container>
+        <Container fluid className="px-5">
           <Navbar.Brand href="#">JOBNEST</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse >

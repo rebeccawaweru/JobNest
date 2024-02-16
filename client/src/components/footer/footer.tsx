@@ -3,7 +3,7 @@ import { Stack, Form, Button,InputGroup, Container } from "react-bootstrap";
 export default function Footer(){
     return (
     <footer>
-    <Container className="d-grid  gap-4 gap-lg-0 gap-md-0 d-lg-flex d-md-flex justify-content-center  pt-2 align-items-center text-left  text-white">
+    <Container fluid className="d-grid px-5 gap-4 gap-lg-0 gap-md-0 d-lg-flex d-md-flex justify-content-center  pt-2 align-items-center text-left  text-white">
       
       <div className="jobnest ">
          <p className="fs-2">JOBNEST</p>
@@ -53,7 +53,7 @@ export default function Footer(){
       </div>
     </Container>
     <hr className="border"/>
-    <Container className="d-grid d-lg-flex d-md-flex justify-content-center justify-content-lg-between justify-content-md-between text-secondary ">
+    <Container fluid className="d-grid px-5 d-lg-flex d-md-flex justify-content-center justify-content-lg-between justify-content-md-between text-secondary ">
         <p>JobNest | Developed by: alx-students</p>
         <p>© JobNest 2024 | All Right Reserved</p>
     </Container>
