@@ -3,7 +3,7 @@ import { AuthWrapper } from "../../../wrapper";
 import { Input, Select } from "../../../components";
 export default function Register(){
     return (
-    <AuthWrapper title="Registration" caption="JobNest // Register">
+    <AuthWrapper bg="auth-bg" title="Registration" caption="JobNest // Register">
     <Container className="bg-white p-5" fluid>
     <div className="border  my-5 p-5">
     <p className="topic fw-bold fs-5 ">User Info</p>

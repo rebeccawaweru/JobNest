@@ -3,7 +3,7 @@ import { Container, Form, Col, Row, Button} from "react-bootstrap";
 import { Input } from "../../../components";
 export default function Login(){
     return (
-        <AuthWrapper title="My Account" caption="JobNest // Login">
+    <AuthWrapper bg="auth-bg" title="My Account" caption="JobNest // Login">
     <Container className="bg-white p-5" fluid>
     <div className="border  my-5 p-5">
     <p className="topic fw-bold fs-5 ">User Info</p>
@@ -18,7 +18,6 @@ export default function Login(){
     <Form.Check defaultChecked label="Remember Me"/>
     <p className="text-primary">Forgot Password?</p>
     </div>
-
     <Button variant="primary rounded-pill px-3 button mt-4">Submit</Button>
     </Col>
     </Row>

@@ -1,7 +1,7 @@
-import { Login } from './pages'
+import { Jobs } from './pages'
 function App() {
   return (
-  <Login/>
+  <Jobs/>
   )
 }
 

@@ -8,11 +8,16 @@ $light:#D2E4F9;
 $largeFont:56px;
 $fontWeight:400;
 $bg:url('../assets/images/auth-bg.jpg');
+$bg-contact:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/images/contact-bg.jpg');
 
 .page {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     line-height: 1.5;
     font-size: 18px;
+}
+.logo {
+    height: 83px;
+    width: 83px;
 }
 .search {
     font-size: small;
@@ -21,12 +26,19 @@ $bg:url('../assets/images/auth-bg.jpg');
 .container{
     width: 100%;
 }
-.auth-bg {
-    background-image: $bg;
+@mixin custombg($background) {
+    background-image: $background;
     height: 85vh;
     background-position: 100% 40%;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.auth-bg {
+    @include custombg($bg)
+}
+.auth-bg-contact {
+    @include custombg($bg-contact);
+   
 }
 .inputbg {
    background-color: $inputColor;
@@ -160,7 +172,7 @@ li{
             width: 100%;
         }
     }
-    .auth-bg {
+    .auth-bg, .auth-bg-contact{
         height: 35vh;
     }
 }
@@ -196,7 +208,7 @@ li{
             width: 100%;
         }
     }
-    .auth-bg {
+    .auth-bg, .auth-bg-contact {
         height: 35vh;
     }
 }
@@ -236,7 +248,7 @@ li{
             width: 45%;
         }
     }
-    .auth-bg {
+    .auth-bg, .auth-bg-contact {
         height: 35vh;
     }
 
@@ -285,7 +297,7 @@ li{
         width: 100%;
        object-fit: contain;
     }
-    .auth-bg {
+    .auth-bg, .auth-bg-contact {
         height: 85vh;
     }
 }
@@ -327,7 +339,7 @@ li{
         width: 100%;
        object-fit: contain;
     }
-    .auth-bg {
+    .auth-bg, .auth-bg-contact {
         height: 85vh;
     }
 }
@@ -345,7 +357,7 @@ li{
         width: 85%;
         object-fit: contain;
     }
-    .auth-bg {
+    .auth-bg, .auth-bg-contact  {
         height: 85vh;
     }
     
