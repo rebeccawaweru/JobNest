@@ -2,22 +2,36 @@
 
 $myBlue:#0f2339;
 $darkBlue:#0F1B31;
+$inputColor:#F2F2F2;
 
 $light:#D2E4F9;
 $largeFont:56px;
 $fontWeight:400;
 $bg:url('../assets/images/auth-bg.jpg');
 
+.page {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    line-height: 1.5;
+    font-size: 18px;
+}
 .search {
     font-size: small;
 }
+
 .container{
     width: 100%;
 }
 .auth-bg {
     background-image: $bg;
-    height: 70vh;
-    background-position: 100% 0%;
+    height: 85vh;
+    background-position: 100% 40%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.inputbg {
+   background-color: $inputColor;
+   color: #333333;
+   border-color: $inputColor;
 }
 .button:hover{
     background-color: $myBlue;
@@ -139,11 +153,16 @@ li{
             width: 100%;
             justify-content:space-between;
         }
+        .group + div {
+            margin-left: 0px;
+        }
         .jobnest {
             width: 100%;
         }
     }
-
+    .auth-bg {
+        height: 35vh;
+    }
 }
 // Small devices (landscape phones, 576px and up)
 @media (min-width: $sm) { 
@@ -170,11 +189,16 @@ li{
             width: 60%;
             justify-content:space-between;
         }
+        .group + div {
+            margin-left: 0px;
+        }
         .jobnest {
             width: 100%;
         }
     }
-   
+    .auth-bg {
+        height: 35vh;
+    }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -201,13 +225,19 @@ li{
         font-size: .9rem;
     
         .group{
-            width: 78%;
+            width: 74%;
             justify-content: space-around;
+        }
+        .group + div {
+            margin-left: 32px;
         }
         
         .jobnest {
             width: 45%;
         }
+    }
+    .auth-bg {
+        height: 35vh;
     }
 
 }
@@ -236,8 +266,11 @@ li{
     }
     footer {
         .group{
-            width: 78%;
+            width: 74%;
             justify-content: space-around;
+        }
+        .group + div {
+            margin-left: 32px;
         }
         
         .jobnest {
@@ -250,7 +283,10 @@ li{
     .frontimage {
         height: 80vh;
         width: 100%;
-object-fit: contain;
+       object-fit: contain;
+    }
+    .auth-bg {
+        height: 85vh;
     }
 }
 
@@ -275,18 +311,24 @@ object-fit: contain;
     footer {
    
         .group{
-            width: 78%;
+            width: 74%;
             justify-content: space-around;
+        }
+        .group + div {
+            margin-left: 32px;
         }
         
         .jobnest {
-            width: 45%;
+            width: 30%;
         }
     }
     .frontimage {
         height: 80%;
         width: 100%;
-    object-fit: contain;
+       object-fit: contain;
+    }
+    .auth-bg {
+        height: 85vh;
     }
 }
 
@@ -303,5 +345,9 @@ object-fit: contain;
         width: 85%;
         object-fit: contain;
     }
+    .auth-bg {
+        height: 85vh;
+    }
+    
 }
 

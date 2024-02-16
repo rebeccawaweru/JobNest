@@ -1,7 +1,7 @@
-import { Register } from './pages'
+import { Login } from './pages'
 function App() {
   return (
-  <Register/>
+  <Login/>
   )
 }
 

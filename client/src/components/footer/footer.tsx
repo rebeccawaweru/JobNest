@@ -42,7 +42,7 @@ export default function Footer(){
       </div>
       </div>
 
-      <div className="mt-4 mx-2">
+      <div className="mt-5">
       <p className="fs-5">Get In Touch</p>
       <p className="text-secondary">Fusce varius, dolor tempor interdum tristiquei bibendum service life.</p>
       <InputGroup className=" mb-3 border rounded-pill text-center p-2  ">
