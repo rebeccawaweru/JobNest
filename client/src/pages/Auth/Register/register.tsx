@@ -21,8 +21,11 @@ export default function Register(){
     <Row>
     <Col sm={4}></Col>
     <Col sm={8}>
+    <div className="d-grid d-lg-flex d-md-flex justify-content-between">
     <Form.Check defaultChecked label="I have read & accept the Terms & Conditions"/>
-    <Button variant="primary rounded-pill px-3 button mt-4">Submit</Button>
+    <a href="/login" className="">Already have account?</a>
+    </div> 
+    <Button variant="primary rounded-pill px-3 button mt-4">Register</Button>
     </Col>
     </Row>
     </Form>

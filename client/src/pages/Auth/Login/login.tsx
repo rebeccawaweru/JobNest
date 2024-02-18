@@ -14,11 +14,14 @@ export default function Login(){
     <Row>
     <Col sm={4}></Col>
     <Col sm={8}>
-    <div className="d-flex justify-content-between">
+    <div className="d-grid d-lg-flex d-md-flex justify-content-between">
     <Form.Check defaultChecked label="Remember Me"/>
-    <p className="text-primary">Forgot Password?</p>
+    <a href="/login" className="text-primary">Forgot Password?</a>
     </div>
-    <Button variant="primary rounded-pill px-3 button mt-4">Submit</Button>
+    <div className="d-flex gap-2 mt-4">
+    <Button href="/apply" className="rounded-pill px-3 button">Login</Button>
+    <Button href="/register" variant="success" className="rounded-pill px-2 button">Register</Button>
+    </div>
     </Col>
     </Row>
     </Form>

@@ -38,7 +38,6 @@ $bg-contact:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../ass
 }
 .auth-bg-contact {
     @include custombg($bg-contact);
-   
 }
 .inputbg {
    background-color: $inputColor;
@@ -136,7 +135,23 @@ h2 {
 li{
     list-style: none;
 }
-
+.jobwrap {
+    @include breakpoint(100%)
+}
+.job-filter {
+    height: fit-content;
+}
+.job-bg {
+    background: $bg-contact;
+    @include breakpoint(100%);
+    height: 40vh;
+}
+.job-detail {
+    @include breakpoint(85%);
+}
+.details {
+    margin-top: -4%;
+}
 @media (max-width: $sm) { 
     .button{
         @include breakpoint($width:100%);
@@ -175,6 +190,15 @@ li{
     .auth-bg, .auth-bg-contact{
         height: 35vh;
     }
+    .jobwrap {
+        @include breakpoint(100%)
+    }
+    .job-detail {
+        @include breakpoint(100%);
+    }
+    .details {
+        margin-top: -16%;
+    }
 }
 // Small devices (landscape phones, 576px and up)
 @media (min-width: $sm) { 
@@ -211,6 +235,16 @@ li{
     .auth-bg, .auth-bg-contact {
         height: 35vh;
     }
+    .jobwrap {
+        @include breakpoint(100%)
+    }
+    .job-detail {
+        @include breakpoint(100%);
+    }
+    .details {
+        margin-top: -8%;
+    }
+
 }
 
 // Medium devices (tablets, 768px and up)
@@ -250,6 +284,9 @@ li{
     }
     .auth-bg, .auth-bg-contact {
         height: 35vh;
+    }
+    .jobwrap {
+        @include breakpoint(100%)
     }
 
 }
@@ -300,6 +337,12 @@ li{
     .auth-bg, .auth-bg-contact {
         height: 85vh;
     }
+    .job-detail {
+        @include breakpoint(85%);
+    }
+    .details {
+        margin-top: -8%;
+    }
 }
 
 // X-Large devices (large desktops, 1200px and up)
@@ -342,6 +385,14 @@ li{
     .auth-bg, .auth-bg-contact {
         height: 85vh;
     }
+    .jobwrap {
+        @include breakpoint(100%)
+    }
+    .details {
+        margin-top: -3%;
+  
+    }
+
 }
 
 // XX-Large devices (larger desktops, 1400px and up)
@@ -360,6 +411,18 @@ li{
     .auth-bg, .auth-bg-contact  {
         height: 85vh;
     }
-    
+    .jobwrap {
+        @include breakpoint(50%)
+    }
+    .job-detail {
+        @include breakpoint(100%);
+    }
+    .job-detail {
+        @include breakpoint(100%);
+    }
+    .details {
+        margin-top: -6%;
+        margin-left: 32%;
+    }
 }
 

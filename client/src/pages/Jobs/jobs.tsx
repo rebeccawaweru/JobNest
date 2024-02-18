@@ -1,21 +1,59 @@
-import { Container } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Job } from "../../components";
-import { HomeWrapper } from "../../wrapper";
+import {  HomeWrapper } from "../../wrapper";
 export default function Jobs(){
     return (
-        <HomeWrapper>
-        <Container className="bg-white shadow-md d-flex rounded-3 shadow-md justify-content-between align-items-center my-2 p-4">
-            <p>Categories</p>
-            <p>Categories</p>
-            <p>Categories</p>
-        </Container>
-        <Container fluid className="px-5 d-flex flex-wrap">
-         <Job/>
-         <Job/>
-         <Job/>
-         <Job/>
-        </Container>
-
-        </HomeWrapper>
+    <HomeWrapper>
+    <div className="job-bg d-flex flex-column text-white text-center align-items-center justify-content-center">
+    <h2>Trending Jobs</h2>
+    <p>JobNest // Latest Jobs</p>
+    </div>
+    <Container fluid className="p-5 bg-white">
+    <Row>
+    <Col sm={4}  xl={4}  xxl={2} className="d-flex job-filter text-muted py-5 flex-column bg-light gap-3  text-left   rounded-3 shadow-sm">
+    <span className="topic">Categories</span>
+    <Form.Check  label="Accounting"/>
+    <Form.Check  label="Commercial"/>
+    <Form.Check  label="IT & Technology"/>
+    <Form.Check  label="Sales & Marketing"/>
+    <Form.Check  label="Support Service"/>
+    <Form.Check  label="UI/UX Designer"/>
+    <Form.Check  label="Hotel & Catering"/>
+    <span className="topic">Tags</span>
+    <Form.Check label="C++"/>
+    <Form.Check label="Creative"/>
+    <Form.Check label="Designer"/>
+    <Form.Check label="Developer"/>
+    <Form.Check label="Full Time"/>
+    <Form.Check label="Javascript"/>
+    <Form.Check label="Remote"/>
+    <span className="topic">Locations</span>
+    <Form.Check label="Nairobi"/>
+    <Form.Check label="Mombasa"/>
+    <Form.Check label="Kisumu"/>
+    <Form.Check label="Nyeri"/>
+    <Form.Check label="Nakuru"/>
+    <Form.Check label="Nanyuki"/>
+    <Form.Check label="Machakos"/>
+    <span className="topic">Job Type</span>
+    <Form.Check label="Freelance"/>
+    <Form.Check label="Full Time"/>
+    <Form.Check label="Part Time"/>
+    <Form.Check label="Hybrid"/>
+    <Button>Search</Button>
+    </Col>
+    <Col sm={8} xl={8} xxl={10} className="d-block flex-wrap d-xxl-flex" >
+    <Job/>
+    <Job/>
+    <Job/>
+    <Job/>
+    <Job/>
+    <Job/>
+    <Job/>
+    <Job/>
+    </Col>
+    </Row>
+    </Container>
+    </HomeWrapper>
     )
 }
