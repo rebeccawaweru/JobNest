@@ -1,7 +1,7 @@
 import { HomeWrapper } from "../../wrapper";
 
-export default function Profile(){
+export default function Resume(){
     return <HomeWrapper>
-        <p className="topic">Profile</p>
+        <p>Resume</p>
     </HomeWrapper>
 }
