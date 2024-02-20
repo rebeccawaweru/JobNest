@@ -1,6 +1,5 @@
 import { Col, Form, FormControl, Row} from "react-bootstrap";
 export default function Select({children}:any, props:any){
-
     return (
     <Form.Group className="my-5 " as={Row}>
     <Form.Label  column sm="4">User Type<span className="text-danger fw-bold mx-1">*</span></Form.Label>
