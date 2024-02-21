@@ -13,7 +13,7 @@ export default function NavBar(){
              <Nav.Link href="#" className="text-black">Blog</Nav.Link>
              <Nav.Link href="/contact" className="text-black">Contact</Nav.Link>
           </Nav>
-          <Button href="/login" className="rounded-pill button">Post A Job</Button>
+          <Button href="/postjob" className="rounded-pill button">Post A Job</Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>

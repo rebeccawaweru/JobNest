@@ -10,10 +10,10 @@ export default function Education(){
         <Button variant="outline-primary buttton">+ Certifications</Button>
         </div>
         <div className="my-2">
-        <CustomInput {...formik?.formik.getFieldProps('certname')} label="Name * " placeholder="e.g. Cloud solutions architect"/>
+        <CustomInput {...formik?.formik.getFieldProps('certname')} label="Name" placeholder="e.g. Cloud solutions architect"/>
         <CustomInput {...formik?.formik.getFieldProps('org')} label="Issuing organization *" placeholder="e.g. AWS"/>
         <CustomInput {...formik?.formik.getFieldProps('cid')} type="password" label="Credential ID *"/>
-        <Button>Add</Button>
+        {/* <Button>Add</Button> */}
         </div>   
         </div>
      

@@ -8,7 +8,7 @@ export default function Skills() {
 
     // or const skills: string[] = ['React', 'Typescript', 'Backend'];
     const handleClick = () => {
-       setSkills([...skills, formik?.formik.values.skills])
+       setSkills(prev => [...prev, formik?.formik.values.skills])
        formik?.formik.setFieldValue('skills', '')
        localStorage.setItem('skills', JSON.stringify(skills))
     }
