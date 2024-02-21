@@ -3,6 +3,7 @@ import { HomeWrapper } from "../../wrapper";
 import { CustomInput } from "../../components";
 import { useFormik } from "formik";
 import { useState } from "react";
+import * as Yup from 'yup';
 export default function PostJob(){
     const [skills, setSkills] = useState<string[]>([]);
     const [skill, setSkill] = useState('')
@@ -26,6 +27,17 @@ export default function PostJob(){
             salary:"",
             deadline:"",
         },
+        validationSchema:Yup.object({
+            company:Yup.string().required("Company is required"),
+            title:Yup.string().required("Job Title is required"),
+            category:Yup.string().required("Category is required"),
+            location:Yup.string().required("Location is required"),
+            type:Yup.string().required("Job type is required"),
+            about:Yup.string().required("Job description is required"),
+            education:Yup.string().required("Education and experience is required"),
+            responsibilities:Yup.string().required("Responsibilities are required"),
+            deadline:Yup.string().required("Application deadline is required")
+        }),
         onSubmit:async(values)=>{
           //in the job model add each of the initialValues above as fields, 
           //also add a field called: skills (this field should have a type of an array)
@@ -43,10 +55,10 @@ export default function PostJob(){
         formik.handleSubmit(event);
     }}>
     <CustomInput type="file" label="Company logo"/>
-    <CustomInput {...formik.getFieldProps("company")} label="Company Name *"/>
-    <CustomInput {...formik.getFieldProps("title")} label="Job Title *"/>
+    <CustomInput isValid={formik.touched.company && !formik.errors.company} isInvalid={!!formik.errors.company && formik.touched.company} errormessage={formik.touched.company && formik.errors.company} {...formik.getFieldProps("company")} label="Company Name *"/>
+    <CustomInput isValid={formik.touched.title && !formik.errors.title} isInvalid={!!formik.errors.title && formik.touched.title} errormessage={formik.touched.title && formik.errors.title}  {...formik.getFieldProps("title")} label="Job Title *"/>
     <span className="text-secondary fs-6">Category *</span>
-        <select {...formik.getFieldProps("category")} className="bg-white  mb-4 w-100 border p-2 rounded-1">
+        <select  {...formik.getFieldProps("category")} className="bg-white w-100 border p-2 rounded-1">
             <option value="Accounting">Accounting</option>
             <option value="Commercial">Commercial</option>
             <option value="IT & Technology">IT & Technology</option>
@@ -54,8 +66,11 @@ export default function PostJob(){
             <option value="Sales & Marketing">Sales & Marketing</option>
             <option value="Hotel & Catering">Hotel & Catering</option>
         </select>
-    <span className="text-secondary fs-6 mt-3">Location *</span>
-        <select {...formik.getFieldProps("location")} className="bg-white mb-4 w-100 border p-2 rounded-1">
+        {formik.touched.category && <p className="text-danger">{formik.touched.category && formik.errors.category}</p>}
+    
+    <div className="mt-4">
+    <span className="text-secondary fs-6">Location *</span>
+        <select {...formik.getFieldProps("location")} className="bg-white  w-100 border p-2 rounded-1">
             <option value="Remote">Remote</option>
             <option value="Nairobi">Nairobi</option>
             <option value="Mombasa">Mombasa</option>
@@ -65,13 +80,20 @@ export default function PostJob(){
             <option value="Nanyuki">Nanyuki</option>
             <option value="Machakos">Machakos</option>
         </select>
-        <span className="text-secondary fs-6 mt-3">Job Type *</span>
+        {formik.touched.location && <p className="text-danger">{formik.touched.location && formik.errors.location}</p>}
+        </div>     
+
+        <div className="mt-4">
+        <span className="text-secondary fs-6 ">Job Type *</span>
         <select {...formik.getFieldProps("type")} className="bg-white  mb-4 w-100 border p-2 rounded-1">
             <option value="Full Time">Full Time</option>
             <option value="Freelance">Freelance</option>
             <option value="Part Time">Part Time</option>
             <option value="Hybrid">Hybrid</option>
         </select>
+        {formik.touched.type && <p className="text-danger">{formik.touched.type && formik.errors.type}</p>}
+        </div>
+
         <span className="text-secondary fs-6 mt-3">Salary</span>
         <Row>
             <Col sm={4}><CustomInput {...formik.getFieldProps("currency")} label="Currency" placeholder="e.g. KES"/></Col>
@@ -87,12 +109,11 @@ export default function PostJob(){
         })}
         </div>
       
-        <CustomInput {...formik.getFieldProps("about")} label="About *" as="textarea" rows={8}/>
-        <CustomInput {...formik.getFieldProps("education")} label="Education & Experience *" as="textarea" rows={8}/>
-        <CustomInput {...formik.getFieldProps("responsibilities")} label="Responsibilities *" as="textarea" rows={8}/>
-        <CustomInput {...formik.getFieldProps("deadline")} type="date" label="Deadline *"/>
+        <CustomInput isValid={formik.touched.about && !formik.errors.about} isInvalid={!!formik.errors.about && formik.touched.about} errormessage={formik.touched.about && formik.errors.about}  {...formik.getFieldProps("about")} label="About *" as="textarea" rows={8}/>
+        <CustomInput isValid={formik.touched.education && !formik.errors.education} isInvalid={!!formik.errors.education && formik.touched.education} errormessage={formik.touched.education && formik.errors.education}  {...formik.getFieldProps("education")} label="Education & Experience *" as="textarea" rows={8}/>
+        <CustomInput isValid={formik.touched.responsibilities && !formik.errors.responsibilities} isInvalid={!!formik.errors.responsibilities && formik.touched.responsibilities} errormessage={formik.touched.responsibilities && formik.errors.responsibilities}  {...formik.getFieldProps("responsibilities")} label="Responsibilities *" as="textarea" rows={8}/>
+        <CustomInput isValid={formik.touched.deadline && !formik.errors.deadline} isInvalid={!!formik.errors.deadline && formik.touched.deadline} errormessage={formik.touched.deadline && formik.errors.deadline}  {...formik.getFieldProps("deadline")} type="date" label="Deadline *"/>
        <Button type="submit">Submit</Button>
-       
     </Form>
     </div> 
     </Container>

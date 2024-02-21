@@ -6,10 +6,18 @@ export default function Experience(){
     return (
         <>
          {/* <p>+ Add</p> */}
-        <CustomInput {...formik?.formik.getFieldProps('company')} label="Company"/>
-        <CustomInput {...formik?.formik.getFieldProps('industry')} label="Industry"/>
-        <CustomInput {...formik?.formik.getFieldProps('title')} label="Job Title"/>
-        <CustomInput {...formik?.formik.getFieldProps('location')} label="Location"/>
+        <CustomInput {...formik?.formik.getFieldProps('company')} label="Company *"/>
+        <span className="text-secondary fs-6">Industry *</span>
+        <select {...formik?.formik.getFieldProps("industry")} className="bg-white  mb-4 w-100 border p-2 rounded-1">
+            <option value="Accounting">Accounting</option>
+            <option value="Commercial">Commercial</option>
+            <option value="IT & Technology">IT & Technology</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Sales & Marketing">Sales & Marketing</option>
+            <option value="Hotel & Catering">Hotel & Catering</option>
+        </select>
+        <CustomInput {...formik?.formik.getFieldProps('title')} label="Job Title *"/>
+        <CustomInput {...formik?.formik.getFieldProps('location')} label="Location *"/>
         <span className="text-secondary fs-6">Employment Type</span>
         <select className="bg-white w-100 border p-2 rounded-1" {...formik?.formik.getFieldProps('type')}>
             <option value="Full Time">Full Time</option>

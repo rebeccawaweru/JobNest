@@ -14,8 +14,8 @@ export const FormContext = createContext<FormContextType | null>(null);
 //     fullname: string;
 //     // Add other fields as needed
 // }
-
 export default function UpdateProfile() {
+    const expertise:Array<string> = JSON.parse(localStorage.getItem('skills') ?? '[]') 
     const initialState= {
         count:1,
     }
@@ -56,7 +56,7 @@ export default function UpdateProfile() {
             industry:"",
             title:"",
             location:"",
-            type:"",
+            type:"Full Time",
             description:"",
             startdate2:"",
             endate2:"",
@@ -66,16 +66,26 @@ export default function UpdateProfile() {
             cid:""
         },
         validationSchema:Yup.object({
-            fullname: Yup.string().required('Full Name is required'),
-            email:Yup.string().email("Invalid email").required("Email is required"),
-            phone:Yup.string().required("Phone number is required"),
-            // about:Yup.string().required("Short description is required")
+            // phone:Yup.string().required("Phone number is required"),
+            // address:Yup.string().required("Address is required"),
+            // about:Yup.string().required("Short description about yourself is required"),
+            // school:Yup.string().required("School is required"),
+            // level:Yup.string().required("Level/Degree is required"),
+            // field:Yup.string().required("Field of study is required"),
+            // startdate:Yup.string().required("Start Date is required"),
+            // endate:Yup.string().required("End Date is required"),
+            // company:Yup.string().required("Company is required"),
+            // industry:Yup.string().required("Industry is required"),
+            // title:Yup.string().required("Job title is required"),
+            // location:Yup.string().required("Location is required"),
+            // startdate2:Yup.string().required("Start Date is required"),
+            // endate2:Yup.string().required("End Date is required"),
         }),
         onSubmit:async(values)=>{
-          console.log(values)
+          console.log(values, expertise)
         }
     })
-    const expertise:Array<string> = JSON.parse(localStorage.getItem('skills') ?? '[]') 
+
     return <FormContext.Provider value={{ formik }}><HomeWrapper>
     <Container className="px-5 py-3" fluid>
      {state.count <= 5 ? 
@@ -89,7 +99,7 @@ export default function UpdateProfile() {
     <MultiStep active={state.count === 4}  title="Skills" icon="bi bi-4-circle-fill"/>
     <MultiStep active={state.count === 5}  title="Other" icon="bi bi-5-circle-fill"/>
     </div>
-    <Form onSubmit={(event) => {
+    <Form noValidate onSubmit={(event) => {
     event.preventDefault(); // Prevent default form submission behavior
     formik.handleSubmit(event); // Call Formik's handleSubmit function
     }}>
@@ -140,9 +150,12 @@ export default function UpdateProfile() {
           <hr></hr>
           <div>
             <p>Skills</p>
-              {expertise.length > 0 && expertise?.map((e)=>{
+            <div className="d-flex flex-wrap gap-2">
+            {expertise.length > 0 && expertise?.map((e)=>{
                 return <Badge key={e} bg="success">{e}</Badge>
               })}
+            </div>
+      
           </div>
           {/* <Button className="mt-2 rounded-pill button">Generate Resume</Button> */}
         </Col>

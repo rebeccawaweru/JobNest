@@ -7,7 +7,15 @@ export default function Education(){
         <>
         {/* <p>+ Add</p> */}
         <CustomInput {...formik?.formik.getFieldProps('school')} label="School"/>
-        <CustomInput {...formik?.formik.getFieldProps('level')} label="Level"/>
+        <span className="text-secondary fs-6">Level/Degree *</span>
+        <select className="bg-white w-100 border mb-3 p-2 rounded-1" {...formik?.formik.getFieldProps('level')}>
+            <option value="PHD">PHD</option>
+            <option value="Masters">Masters</option>
+            <option value="Bsc">Bsc</option>
+            <option value="Diploma">Diploma</option>
+            <option value="Certificate">Certificate</option>
+            <option value="HighSchool/GED">High School/GED</option>
+        </select>
         <CustomInput {...formik?.formik.getFieldProps('field')} label="Field of study"/>
         <CustomInput {...formik?.formik.getFieldProps('startdate')} type="date" label="Start date"/>
         <CustomInput {...formik?.formik.getFieldProps('endate')} type="date" label="End date"/>
