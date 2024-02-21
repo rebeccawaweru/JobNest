@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const jobController = require('../controllers/jobController');
+import requireAuth from '../middleware/requireAuth.js';
+
+// requires authentication for all job routes
+router.use(requireAuth)
 
 //Create a job
 router.post('/jobs', jobController.createJob);
