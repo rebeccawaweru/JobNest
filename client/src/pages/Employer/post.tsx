@@ -1,5 +1,4 @@
-import { Badge, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { HomeWrapper } from "../../wrapper";
+import { Badge, Button, Col, Form, Row } from "react-bootstrap";
 import { CustomInput } from "../../components";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -45,11 +44,7 @@ export default function PostJob(){
           console.log(values, skills)
         }
     })
-    return <HomeWrapper>
-    <Container fluid className="px-5 py-3">
-    <div className="bg-white rounded-2 p-5 shadow-sm">
-    <h4 className="text-primary"><i className="bi bi-briefcase-fill"></i> Post A Job</h4>
-    <hr/>
+    return <div className="bg-white rounded-2 p-5 shadow-sm">
     <Form onSubmit={(event)=>{
         event.preventDefault();
         formik.handleSubmit(event);
@@ -100,7 +95,7 @@ export default function PostJob(){
             <Col sm={8}><CustomInput {...formik.getFieldProps("salary")} label="Amount"/></Col>
         </Row>
          <Row>
-         <Col sm={8}><label className="text-muted">Add Preferred Skills</label><input value={skill} onChange={(e)=>setSkill(e.target.value)} type="text" className="w-100"/></Col>
+         <Col sm={8}><label className="text-muted fs-6">Add Preferred Skills</label><input value={skill} onChange={(e)=>setSkill(e.target.value)} type="text" className="w-100"/></Col>
          <Col sm={4}><Button type="button" onClick={()=>handleSkill()} variant="outline-primary button" className="mt-4">+ Add</Button></Col>
          </Row>
         <div className="d-flex gap-2 flex-wrap my-2">
@@ -116,6 +111,4 @@ export default function PostJob(){
        <Button type="submit">Submit</Button>
     </Form>
     </div> 
-    </Container>
-    </HomeWrapper>
 }

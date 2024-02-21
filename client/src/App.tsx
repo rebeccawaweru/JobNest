@@ -1,4 +1,4 @@
-import { Home, Jobs, JobDetails, Contact, Profile, Register, Login, UpdateProfile, Resume, PostJob } from './pages'
+import { Home, Jobs, JobDetails, Contact, Register, Login, UpdateProfile, Resume, PostJob, EmployerDashboard } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
     <Route path='/jobs/details' element={<JobDetails/>}/>
     <Route path='/apply' element={<UpdateProfile/>}/>
     <Route path='/contact' element={<Contact/>}/>
-    <Route path='/profile' element={<Profile/>}/>
     <Route path='/resume' element={<Resume/>}/>
+    <Route path='/employer' element={<EmployerDashboard/>}/>
   </Routes>
   </BrowserRouter>
   )

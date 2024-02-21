@@ -34,7 +34,7 @@ export default function Login(){
     <a href="/login" className="text-primary">Forgot Password?</a>
     </div>
     <div className="d-flex gap-2 mt-4">
-    <Button type="submit"  className="rounded-pill px-3 button">Login</Button>
+    <Button href="/apply" type="submit"  className="rounded-pill px-3 button">Login</Button>
     <Button href="/register" variant="success" className="rounded-pill px-2 button">Register</Button>
     </div>
     </Col>

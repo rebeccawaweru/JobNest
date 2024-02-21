@@ -46,7 +46,6 @@ export default function Register(){
     </select>
     {formik.touched.type && <p className="text-danger mx-2">{formik.touched.type && formik.errors.type}</p>}
     </Col>
-
     </Row>
     <Input {...formik.getFieldProps("fullname")} placeholder="enter your fullname" label="Full Name" isValid={formik.touched.fullname && !formik.errors.fullname}  isInvalid={!!formik.errors.fullname && formik.touched.fullname}  errormessage={formik.touched.fullname && formik.errors.fullname}/>
     <Input {...formik.getFieldProps("username")} placeholder="enter preferred username" label="User Name" isValid={formik.touched.username && !formik.errors.username}  isInvalid={!!formik.errors.username && formik.touched.username}  errormessage={formik.touched.username && formik.errors.username}/>
