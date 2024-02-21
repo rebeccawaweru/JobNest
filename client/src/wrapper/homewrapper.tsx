@@ -6,8 +6,9 @@ export default function HomeWrapper({children}:any){
     <NavBar/>
     <div className='d-block gap-4 overflow-hidden '>
     {children}
-    <Footer/>
+
     </div>
+    <Footer/>
     </Container> 
     )
 }

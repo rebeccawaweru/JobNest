@@ -15,9 +15,9 @@ export default function Jobs(){
     <Form.Check  label="Accounting"/>
     <Form.Check  label="Commercial"/>
     <Form.Check  label="IT & Technology"/>
+    <Form.Check  label="Engineering"/>
     <Form.Check  label="Sales & Marketing"/>
     <Form.Check  label="Support Service"/>
-    <Form.Check  label="UI/UX Designer"/>
     <Form.Check  label="Hotel & Catering"/>
     <span className="topic">Tags</span>
     <Form.Check label="C++"/>
@@ -28,6 +28,7 @@ export default function Jobs(){
     <Form.Check label="Javascript"/>
     <Form.Check label="Remote"/>
     <span className="topic">Locations</span>
+    <Form.Check label="Remote"/>
     <Form.Check label="Nairobi"/>
     <Form.Check label="Mombasa"/>
     <Form.Check label="Kisumu"/>

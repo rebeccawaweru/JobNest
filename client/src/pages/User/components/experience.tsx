@@ -16,7 +16,7 @@ export default function Experience(){
             <option value="Part Time">Part Time</option>
             <option value="Contract">Contract</option>
             <option value="Seasonal">Seasonal</option>
-        </select >
+        </select>
         {/* <CustomSelect {...formik?.formik.getFieldProps('type')} label='Employement Type'>
     
         </CustomSelect> */}

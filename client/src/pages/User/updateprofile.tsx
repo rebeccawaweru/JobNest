@@ -77,10 +77,10 @@ export default function UpdateProfile() {
     })
     const expertise:Array<string> = JSON.parse(localStorage.getItem('skills') ?? '[]') 
     return <FormContext.Provider value={{ formik }}><HomeWrapper>
-    <Container className="px-5 py-3 " fluid>
+    <Container className="px-5 py-3" fluid>
      {state.count <= 5 ? 
     <div className="bg-white rounded-2 p-5 shadow-sm">
-    <h4 className="topic">Update Your Profile</h4>
+    <h4 className="text-primary">Update Your Profile</h4>
     <hr/>
     <div className="d-flex justify-content-between">
     <MultiStep active={state.count === 1} title="Basic Information" icon="bi bi-1-circle-fill"/>
