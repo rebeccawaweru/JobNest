@@ -1,10 +1,11 @@
-import { Container, Button, Form, Col, Row,  Badge} from "react-bootstrap";
+import { Container, Button, Form} from "react-bootstrap";
 import { HomeWrapper } from "../../wrapper";
 import { MultiStep } from "../../components";
 import { BasicInfo, Education, Experience, Skills, Others } from "./components";
 import { useReducer, createContext } from "react";
 import * as Yup from 'yup'
 import { useFormik } from "formik";
+import { CandidateDashboard } from "..";
 interface FormContextType {
     formik: ReturnType<typeof useFormik>;
 }
@@ -17,7 +18,7 @@ export const FormContext = createContext<FormContextType | null>(null);
 export default function UpdateProfile() {
     const expertise:Array<string> = JSON.parse(localStorage.getItem('skills') ?? '[]') 
     const initialState= {
-        count:1,
+        count:6,
     }
     const reducer = (state=initialState, action:any) =>{
           switch(action.type) {
@@ -87,8 +88,8 @@ export default function UpdateProfile() {
     })
 
     return <FormContext.Provider value={{ formik }}><HomeWrapper>
-    <Container className="px-5 py-3" fluid>
      {state.count <= 5 ? 
+    <Container className="px-5 py-3" fluid>
     <div className="bg-white rounded-2 p-5 shadow-sm">
     <h4 className="text-primary">Update Your Profile</h4>
     <hr/>
@@ -114,119 +115,10 @@ export default function UpdateProfile() {
     </div>
     </Form>
     </div>
-     : <div>
-    <div className="job-bg d-flex flex-column text-white text-center align-items-center justify-content-center">
-    <h2>{formik.values.fullname}</h2>
-    <p>JobNest // profile</p>
-    </div>
-      <Row className="mt-4 bg-white p-4">
-        <Col sm={4} className=" bg-light rounded-1 p-3">
-          <div className="d-flex mb-3 justify-content-center gap-4 align-items-center">
-            <div className="bg-white shadow-sm profile rounded-circle"></div>
-             <div className="d-grid">
-             <span className="mt-2">{formik.values.fullname}</span>
-             <a href="" onClick={()=>dispatch({type:"Reset"})}>Update Profile</a>
-             </div>
-          </div>
-          <div className="d-flex justify-content-between">
-          <p className="text-muted">Email:</p>
-          <p>{formik.values.email}</p>
-          </div>
-          <hr></hr>
-          <div className="d-flex justify-content-between">
-          <p className="text-muted">Phone:</p>
-          <p>{formik.values.phone}</p>
-          </div>
-          <hr></hr>
-          <div className="d-flex justify-content-between">
-          <p className="text-muted">Address:</p>
-          <p>{formik.values.address}</p>
-          </div>
-          <hr></hr>
-          <div className="d-flex justify-content-between">
-          <p className="text-muted">Website:</p>
-          <a href="">{formik.values.website}</a>
-          </div>
-          <hr></hr>
-          <div>
-            <p>Skills</p>
-            <div className="d-flex flex-wrap gap-2">
-            {expertise.length > 0 && expertise?.map((e)=>{
-                return <Badge key={e} bg="success">{e}</Badge>
-              })}
-            </div>
-      
-          </div>
-          {/* <Button className="mt-2 rounded-pill button">Generate Resume</Button> */}
-        </Col>
-        <Col sm={8} className="">
-        <div className="d-flex justify-content-end">
-        <Button href="/resume" variant="success" className="">Generate CV</Button>
-        </div>
-     
-        <div>
-            <h3 className="topic">About</h3>
-            <p className="text-muted">
-             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.
-            </p>
-        </div>
+        </Container>
+     : 
+     <CandidateDashboard formik={formik} expertise={expertise} handleClick={()=>dispatch({type:"Reset"})}/> }
 
-        <div>
-            <p className="topic">Education</p>
-            <div className="d-flex gap-2">
-                    <span className="item p-3 rounded-circle d-flex text-center align-items-center justify-content-center border border-primary">
-                    01</span>
-
-                    <div>
-                    <div>{formik.values.school}</div>
-                    {/* <span>Software engineering</span> */}
-                    <div>{formik.values.level} {formik.values.field} ({formik.values.startdate}-{formik.values.endate})</div>
-                    <div>Grade: {formik.values.grade}</div>
-                    <div className="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
-                    </div>
-                    </div>
-        </div>
-
-        <div className="mt-3">
-            <p className="topic">Experience</p>
-            <div className="d-flex gap-2">
-                    <span className="item p-3 rounded-circle d-flex text-center align-items-center justify-content-center border border-primary">
-                    01</span>
-
-                    <div>
-                    <div>{formik.values.company} - {formik.values.type}</div>
-                    {/* <span>Software engineering</span> */}
-                    <div>{formik.values.title} ({formik.values.startdate2}-{formik.values.endate2})</div>
-                    <div>{formik.values.location}</div>
-                    <div className="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
-                    </div>
-             </div>
-        </div>
-
-        <div className="mt-3">
-            <p className="topic">Certifications/Licenses</p>       
-            <div className="d-flex gap-2">
-                    <span className="item p-3 rounded-circle d-flex text-center align-items-center justify-content-center border border-primary">
-                    01</span>
-
-                    <div>
-                    <div>{formik.values.certname}</div>
-                    {/* <span>Software engineering</span> */}
-                    <div>{formik.values.org}</div>
-                    <div>Credential ID: <span className="text-primary">{formik.values.cid}</span></div>
-                    <div className="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
-                    </div>
-             </div>  
-                   
-        </div>
-        </Col>
-      </Row>
-    </div>}
-
-    </Container>
     </HomeWrapper>
     </FormContext.Provider> 
 }

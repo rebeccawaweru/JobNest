@@ -39,10 +39,12 @@ $bg-contact:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../ass
     background-size: cover;
 }
 .auth-bg {
-    @include custombg($bg)
+    @include custombg($bg);
+    // background-repeat: no-repeat;
 }
 .auth-bg-contact {
     @include custombg($bg-contact);
+    // background-repeat: no-repeat;
 }
 .inputbg {
    background-color: $inputColor;
@@ -151,6 +153,9 @@ li{
 .jobwrap {
     @include breakpoint(100%)
 }
+.cwrap {
+    @include breakpoint(25%)
+}
 .job-filter {
     height: fit-content;
 }
@@ -158,6 +163,8 @@ li{
     background: $bg-contact;
     @include breakpoint(100%);
     height: 40vh;
+    background-repeat: no-repeat;
+    background-size: cover
 }
 .job-detail {
     @include breakpoint(85%);
@@ -203,7 +210,7 @@ li{
     .auth-bg, .auth-bg-contact{
         height: 35vh;
     }
-    .jobwrap {
+    .jobwrap, .cwrap {
         @include breakpoint(100%)
     }
     .job-detail {
@@ -248,7 +255,7 @@ li{
     .auth-bg, .auth-bg-contact {
         height: 35vh;
     }
-    .jobwrap {
+    .jobwrap, .cwrap {
         @include breakpoint(100%)
     }
     .job-detail {
@@ -257,6 +264,7 @@ li{
     .details {
         margin-top: -8%;
     }
+   
 
 }
 
@@ -298,7 +306,7 @@ li{
     .auth-bg, .auth-bg-contact {
         height: 35vh;
     }
-    .jobwrap {
+    .jobwrap, .cwrap{
         @include breakpoint(100%)
     }
 
@@ -355,6 +363,9 @@ li{
     }
     .details {
         margin-top: -8%;
+    }
+    .cwrap {
+        @include breakpoint(25%)
     }
 }
 
