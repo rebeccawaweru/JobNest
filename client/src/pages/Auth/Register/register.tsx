@@ -4,7 +4,10 @@ import { Input} from "../../../components";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import client from "../../../api/client";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 export default function Register(){
+    const navigate = useNavigate()
     const formik = useFormik({
         initialValues:{
             type:"candidate",
@@ -26,8 +29,11 @@ export default function Register(){
         }),
         onSubmit:async(values) => {
             console.log(values)
-            await client.post('/server/user/register', values).then((response)=>{
-                console.log(response.data)
+            await client.post('/user/register', values).then((response)=>{
+               if(response.data.token){
+                Swal.fire('Success', 'Signup successfull', 'success')
+                navigate('/login')
+               }
             
             })
         }

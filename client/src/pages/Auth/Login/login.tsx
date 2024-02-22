@@ -3,7 +3,10 @@ import { Container, Form, Col, Row, Button} from "react-bootstrap";
 import { Input } from "../../../components";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import client from "../../../api/client";
+import { useNavigate } from "react-router-dom";
 export default function Login(){
+    const navigate = useNavigate()
     const formik = useFormik({
         initialValues:{
             username:"",
@@ -14,7 +17,17 @@ export default function Login(){
             password:Yup.string().trim().min(6, "Password should contain 6 or more characters").required("Password is required"),
         }),
         onSubmit:async(values) =>{
-            console.log(values)
+            await client.post('/user/login', values).then((response)=>{
+            if (response.data.token){
+                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('fullname', response.data.user.fullname)
+                if (response.data.user.type === "candidate"){
+                    navigate('/apply')
+                } else if (response.data.user.type === "employer") {
+                    navigate('/employer')
+                }
+            }
+            })
         }
     })
     return (
@@ -34,7 +47,7 @@ export default function Login(){
     <a href="/login" className="text-primary">Forgot Password?</a>
     </div>
     <div className="d-flex gap-2 mt-4">
-    <Button href="/apply" type="submit"  className="rounded-pill px-3 button">Login</Button>
+    <Button type="submit"  className="rounded-pill px-3 button">Login</Button>
     <Button href="/register" variant="success" className="rounded-pill px-2 button">Register</Button>
     </div>
     </Col>
