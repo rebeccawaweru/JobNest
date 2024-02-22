@@ -35,9 +35,10 @@ userSchema.statics.register = async function (
 	if (!validator.isEmail(email)) {
 		throw new Error('The email is not valid')
 	}
-	if (!validator.isStrongPassword(password)) {
-		throw new Error('Please use a stronger password')
-	}
+
+	// if (!validator.isStrongPassword(password)) {
+	// 	throw new Error('Please use a stronger password')
+	// }
 	// if email exists throw new error else create user
 	const exists = await this.findOne({ email })
 	if (exists) {

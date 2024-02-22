@@ -13,9 +13,9 @@ const app = express();
 
 app.use(bodyParser.json({ limit: "50mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
-app.use(cors()); //i've corrected this you had not invoked cors
+app.use(cors());
 
-app.use('/server/user', router) //this needs to be declared after cors not before
+app.use('/server/user', router)
 
 const CONNECTION_URL = process.env.MONGO
 
