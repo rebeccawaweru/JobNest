@@ -1,6 +1,8 @@
 import React, {useState} from "react"
 import { Row, Col, Button, Badge, Container } from "react-bootstrap"
 import { MyJobs } from "../../Employer";
+import AuthContent from "../../../context/AuthContext";
+// import { AuthContext } from "../../../context/AuthContext";
 interface CandidateDashboardProps {
     formik: any;
     expertise: string[];
@@ -9,10 +11,11 @@ interface CandidateDashboardProps {
 
 const CandidateDashboard: React.FC<CandidateDashboardProps> = ({ formik, expertise, handleClick }) => {    
   const [tab, setTab] = useState(1);
-   return <div>
+  const fullname = localStorage.getItem('fullname');
+   return <AuthContent>
     <div className="job-bg d-flex flex-column text-white text-center align-items-center justify-content-center">
-    <h2>{formik.values.fullname}</h2>
-    <p>JobNest // profile</p>
+    <h2>{fullname}</h2>
+    <p>JobNest // profile </p>
     </div>
     <Container fluid className="px-5 py-3">
       <Row className="mt-4 bg-white p-4">
@@ -129,6 +132,6 @@ const CandidateDashboard: React.FC<CandidateDashboardProps> = ({ formik, experti
 
       </Row>
       </Container>
-    </div>
+    </AuthContent>
 }
 export default CandidateDashboard
