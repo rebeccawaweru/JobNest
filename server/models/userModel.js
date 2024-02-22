@@ -7,22 +7,29 @@ import validator from 'validator';
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-  email: {
-	type: String,
-	required: true,
-	unique: true
-  },
-  password: {
-	type: String,
-	required: true
-  }
+  type : { type: String, required: true},
+  fullname : { type: String, required: true},
+  username : { type: String, required: true, unique: true},
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  phone : { type: String },
+  address : { type: String },
+  website : { type: String },
+  about : { type: String },
+  education : { type: Array },
+  experience : { type: Array },
+  skills : { type: Array },
+  certifications : { type: Array },
+  updated : { type: Boolean }
 
 })
 
 // register static method
-userSchema.statics.register = async function (email, password) {
+userSchema.statics.register = async function (
+	type, fullname, username, email, password,
+	) {
 	// validate the email and password strength
-	if (!email || !password) {
+	if (!type || !fullname || !username || !email || !password) {
 		throw new Error('All fields must be filled to proceed')
 	}
 	if (!validator.isEmail(email)) {
@@ -39,22 +46,22 @@ userSchema.statics.register = async function (email, password) {
 
 	const salt = await bcrypt.genSalt(10)
 	const hash = await bcrypt.hash(password, salt)
-	const user = await this.create({ email, password: hash })
+	const user = await this.create({ type, fullname, username, email, password: hash })
 
 	return user
 }
 
 // static login method
 
-userSchema.statics.login = async function(email, password) {
-	if (!email || !password) {
+userSchema.statics.login = async function(username, password) {
+	if (!username || !password) {
 		throw new Error('All fields must be filled to proceed')
 	}
 
-	const user = await this.findOne({ email })
-	// if no user email exists throw new error
+	const user = await this.findOne({ username })
+	// if no username exists throw new error
 	if (!user) {
-		throw new Error('Incorrect email, try again')
+		throw new Error('This username does not exist, try again')
 	}
 
 	const passwordMatch = await bcrypt.compare(password, user.password)

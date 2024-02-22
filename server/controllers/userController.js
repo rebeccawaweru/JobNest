@@ -7,13 +7,13 @@ const createToken = (_id) => {
 }
 // login user
 export const loginUser = async (req, res) => {
-	const { email, password } = req.body
+	const { username, password } = req.body
 	try {
-		const user = await User.login(email, password)
+		const user = await User.login(username, password)
 		// create token
 		const token = createToken(user._id)
 
-		res.status(200).json({email, token})
+		res.status(200).json({username, token})
 
 	} catch (error) {
 		res.status(400).json({error: error.message})
@@ -23,13 +23,13 @@ export const loginUser = async (req, res) => {
 // register user
 export const registerUser = async (req, res) => {
 
-	const { email, password } = req.body
+	const { type, fullname, username, email, password } = req.body
 	try {
-		const user = await User.register(email, password)
+		const user = await User.register(type, fullname, username, email, password)
 		// create token
 		const token = createToken(user._id)
 
-		res.status(200).json({email, token})
+		res.status(200).json({email, user, token})
 
 	} catch (error) {
 		res.status(400).json({error: error.message})
