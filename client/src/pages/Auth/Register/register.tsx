@@ -3,6 +3,7 @@ import { AuthWrapper } from "../../../wrapper";
 import { Input} from "../../../components";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import client from "../../../api/client";
 export default function Register(){
     const formik = useFormik({
         initialValues:{
@@ -25,6 +26,10 @@ export default function Register(){
         }),
         onSubmit:async(values) => {
             console.log(values)
+            await client.post('/server/user/register', values).then((response)=>{
+                console.log(response.data)
+            
+            })
         }
     })
     return (
