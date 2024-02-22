@@ -15,7 +15,9 @@ app.use(bodyParser.json({ limit: "50mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
 app.use(cors());
 
-app.use('/server/user', router)
+app.use('/server', router)
+
+
 
 const CONNECTION_URL = process.env.MONGO
 

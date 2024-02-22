@@ -37,4 +37,57 @@ export const registerUser = async (req, res) => {
 	}
 }
 
+// get all users
+export const getAllUsers = async (req, res) => {
+  try {
+	const users = await User.find();
+	if (!users) {
+	  res.status(400).json({error: 'No users found'});
+
+	}
+	res.status(200).json({ message: 'The users were fetched successfully', users});
+  } catch(error) {
+	res.status(400).json({error: error.message});
+  }
+}
+// get user by id
+export const getUserById = async (req, res) => {
+	try {
+	  const { id } = req.params;
+	  const user = await User.findById(id);
+	  if (!user) {
+		return res.status(400).json({error: "No user found by that id"});
+	  }
+	  res.status(200).json({ message: 'The user was fetched successfully', user });
+	} catch(error) {
+	  res.status(400).json({error: error.message});
+	}
+  }
+// update user by id
+export const updateUserById = async (req, res) => {
+	try {
+	  const { id } = req.params;
+	  const user = await User.findByIdAndUpdate(id, req.body, { new: true })
+	  if (!user) {
+		return res.status(400).json({error: "No user can be updated by that id"});
+	  }
+	  res.status(203).json({ message: 'User updated successfully', user});
+	} catch(error) {
+	  res.status(400).json({error: error.message});
+	}
+  }
+
+// delete user by id
+export const deleteUserById = async (req, res) => {
+	try {
+	  const { id } = req.params;
+	  const user = await User.findByIdAndDelete(id)
+	  if (!user) {
+		return res.status(400).json({error: "No user can be deleted by that id"});
+	  }
+	  res.status(203).json({ message: 'User deleted successfully', user});
+	} catch(error) {
+	  res.status(400).json({error: error.message});
+	}
+  }
 
