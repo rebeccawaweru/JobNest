@@ -1,7 +1,11 @@
 import express from 'express';
 import { createJob, getAllJobs, getJobById, updateJobById, deleteJobById } from '../controllers/jobController.js';
 const router = express.Router();
+import requireAuth from '../middleware/requireAuth.js';
 
+
+// requires authentication for all job routes
+router.use(requireAuth)
 
 //Create a job
 router.post('/jobs', createJob);

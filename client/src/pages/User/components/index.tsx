@@ -1,0 +1,6 @@
+export {default as BasicInfo} from './basic'
+export {default as Education} from './education'
+export {default as Experience} from './experience'
+export {default as Skills} from './skills'
+export {default as Others} from './others'
+export {default as Resume} from './resume'

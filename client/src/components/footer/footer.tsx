@@ -2,7 +2,7 @@ import { Stack, Form, Button,InputGroup, Container } from "react-bootstrap";
 
 export default function Footer(){
     return (
-    <footer>
+    <footer >
     <Container fluid className="d-grid px-5 gap-4 gap-lg-0 gap-md-0 d-lg-flex d-md-flex justify-content-center  pt-2 align-items-center text-left  text-white">
       
       <div className="jobnest ">

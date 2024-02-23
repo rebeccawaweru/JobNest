@@ -1,7 +1,10 @@
 import { job1} from "../assets/images";
 import { Button, Image, Stack } from "react-bootstrap";
 import { Rating } from ".";
+import { useLocation } from "react-router-dom";
 export default function Job(){
+    const location = useLocation()
+    const current = location.pathname
     return(
         <div className="border border-light bg-white shadow-sm p-3 jobwrap mb-3">
         <div className="d-grid d-lg-flex d-md-flex justify-content-between mt-3">
@@ -15,8 +18,10 @@ export default function Job(){
          </div>
          <Stack direction="horizontal" gap={3}>
          <Button href="/jobs/details" className="rounded-pill px-4 button">Open</Button>
-         <Button href="/apply" variant="success" className="rounded-pill px-4 button">Apply</Button>
-        
+        {current === '/employer' ?  <Button variant="success" className="rounded-pill">Applications (4)</Button> :
+        current !== '/apply' ?  <Button href="/login" variant="success" className="rounded-pill px-4 button">Apply</Button> 
+        : null}
+     
         </Stack>
         
          </div>
