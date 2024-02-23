@@ -1,5 +1,5 @@
 import express from 'express';
-import { createJob, getAllJobs, getJobById, updateJobById, deleteJobById } from '../controllers/jobController.js';
+import { createJob, getAllJobs, getJobById, updateJobById, deleteJobById} from '../controllers/jobController.js';
 const router = express.Router();
 import requireAuth from '../middleware/requireAuth.js';
 

@@ -51,7 +51,7 @@ export const updateJobById = async (req, res) => {
 };
 
 // Delete a job by ID
-exports.deleteJobById = async (req, res) => {
+export const deleteJobById = async (req, res) => {
  const jobId = req.params.id;
  try {
    const deletedJob = await Job.findByIdAndRemove(jobId);
