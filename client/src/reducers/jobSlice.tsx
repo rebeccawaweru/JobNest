@@ -17,7 +17,7 @@ const initialState:JobType = {
 
 export const newJob = createAsyncThunk('/jobs/new', async(values:any, {rejectWithValue}) =>{
      try {
-        const response = await client.post('/', values);
+        const response = await client.post('/jobs', values);
         return response.data
      } catch (error) {
         rejectWithValue(error)
@@ -27,7 +27,7 @@ export const newJob = createAsyncThunk('/jobs/new', async(values:any, {rejectWit
 export const getJob = createAsyncThunk('/jobs/:id', async(id:string, {rejectWithValue}) => {
     try {
        const response = await client.get('/jobs/'+id);
-       return response.data
+       return response.data.job
     } catch (error) {
         rejectWithValue(error)
     }
@@ -36,7 +36,7 @@ export const getJob = createAsyncThunk('/jobs/:id', async(id:string, {rejectWith
 export const getJobs = createAsyncThunk('/jobs/find', async(values, {rejectWithValue}) => {
     try {
        const response = await client.get('/jobs');
-       return response.data
+       return response.data.job
     } catch (error) {
         rejectWithValue(error)
     }

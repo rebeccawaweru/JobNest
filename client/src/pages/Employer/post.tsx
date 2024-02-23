@@ -3,7 +3,16 @@ import { CustomInput } from "../../components";
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from 'yup';
-export default function PostJob(){
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import { newJob } from "../../reducers/jobSlice";
+import Swal from "sweetalert2";
+interface propObjects {
+    user:any,
+    handleClick:any
+}
+export default function PostJob({user,handleClick}:propObjects){
+    const dispatch = useDispatch<AppDispatch>()
     const [skills, setSkills] = useState<string[]>([]);
     const [skill, setSkill] = useState('')
     const handleSkill = () =>{
@@ -12,7 +21,7 @@ export default function PostJob(){
     }
     const formik = useFormik({
         initialValues:{
-            poster:"",
+            poster:user.user._id,
             logo:"",
             company:"",
             title:"",
@@ -38,10 +47,14 @@ export default function PostJob(){
             deadline:Yup.string().required("Application deadline is required")
         }),
         onSubmit:async(values)=>{
-          //in the job model add each of the initialValues above as fields, 
-          //also add a field called: skills (this field should have a type of an array)
-          //also make sure that the labels in this form that have * contain required option in the corresponding field in the model
-          console.log(values, skills)
+            dispatch(newJob({...values, skills:skills})).then((response)=>{
+                if(response.payload.success){
+                    Swal.fire('Success', 'Job created successfully', 'success')
+                    handleClick()
+                }
+                
+            })
+        //   console.log(values, skills)
         }
     })
     return <div className="bg-white rounded-2 p-5 shadow-sm">

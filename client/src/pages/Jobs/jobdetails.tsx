@@ -1,7 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
 import {HomeWrapper} from "../../wrapper";
 import { Job } from "../../components";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 export default function JobDetails(){
+    const {job} = useSelector((state:RootState)=> state.job)
     return (
         <HomeWrapper>
             <div className="job-bg  d-flex flex-column text-white text-center align-items-center justify-content-center">
