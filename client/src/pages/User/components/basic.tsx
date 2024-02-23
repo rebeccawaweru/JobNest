@@ -3,6 +3,7 @@ import { CustomInput } from "../../../components"
 import { useContext } from "react"
 export default function BasicInfo() {
     const  formik  = useContext(FormContext)
+
     return (
         <div>
         <CustomInput {...formik?.formik.getFieldProps('fullname')}  label="Full Name *"/>
