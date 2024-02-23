@@ -3,10 +3,20 @@ import { Container, Form, Col, Row, Button} from "react-bootstrap";
 import { Input } from "../../../components";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import client from "../../../api/client";
 import { useNavigate } from "react-router-dom";
+import { login,getUser } from "../../../reducers/userSlice";
+import { AppDispatch } from "../../../store";
+import { useDispatch } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+
+interface DecodeType {
+    _id:string
+    iat:number
+    exp:number
+  }
 export default function Login(){
     const navigate = useNavigate()
+    const dispatch = useDispatch<AppDispatch>()
     const formik = useFormik({
         initialValues:{
             username:"",
@@ -17,17 +27,25 @@ export default function Login(){
             password:Yup.string().trim().min(6, "Password should contain 6 or more characters").required("Password is required"),
         }),
         onSubmit:async(values) =>{
-            await client.post('/user/login', values).then((response)=>{
-            if (response.data.token){
-                localStorage.setItem('token', response.data.token)
-                localStorage.setItem('fullname', response.data.user.fullname)
-                if (response.data.user.type === "candidate"){
+          dispatch(login({...values})).then((response)=>{
+             const decode:DecodeType = jwtDecode(response.payload.token)
+             localStorage.setItem('token', response.payload.token);
+             localStorage.setItem('id', decode._id)
+             dispatch(getUser(decode._id)).then(()=>{
+                if (response.payload.user.type === "candidate"){
                     navigate('/apply')
-                } else if (response.data.user.type === "employer") {
+                } else if (response.payload.user.type === "employer") {
                     navigate('/employer')
                 }
-            }
-            })
+             })
+          })
+            // await client.post('/user/login', values).then((response)=>{
+            // if (response.data.token){
+       
+            //     localStorage.setItem('fullname', response.data.user.fullname)
+         
+            // }
+            // })
         }
     })
     return (
