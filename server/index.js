@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from 'dotenv';
 import router from './routes/user.js';
+import fileRoute from "./routes/fileRoute.js";
 
 dotenv.config();
 const app = express();
@@ -15,8 +16,9 @@ app.use(bodyParser.json({ limit: "50mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
 app.use(cors());
 
-app.use('/server', router)
+app.use('/server', router);
 
+app.use('/server/file', fileRoute);
 
 
 const CONNECTION_URL = process.env.MONGO
