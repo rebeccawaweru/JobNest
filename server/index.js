@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from 'dotenv';
+import jobRoutes from './routes/jobsRoute.js';
 import router from './routes/user.js';
 
 dotenv.config();
@@ -15,6 +16,8 @@ app.use(bodyParser.json({ limit: "50mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
 app.use(cors());
 
+app.use(express.json());
+app.use('/', jobRoutes);
 app.use('/server', router)
 
 
