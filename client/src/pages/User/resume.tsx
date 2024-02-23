@@ -3,7 +3,10 @@ import { Button, Container } from "react-bootstrap";
 import { useReactToPrint } from 'react-to-print';
 import { createRef } from "react";
 import { generatePDF } from "../../utils/helpers";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 export default function Resume(){
+    const user = useSelector((state:RootState)=>state.user)
     const printRef = createRef<HTMLDivElement>()
     const handlePrint = useReactToPrint({
         bodyClass:"print-agreement",
@@ -24,62 +27,78 @@ export default function Resume(){
         <Container id="pdf-content" className="border border-1 rounded-3 p-4 d-grid gap-3">
         <div ref={printRef}>
         <div className="text-center d-grid">
-        <span>Rebecca Waweru</span>
-        <span>0702742458 |<span>wawerur95@gmail.com</span> | <a href="">https://beccatech.tech</a></span>
+        <span>{user.user.fullname}</span>
+        <span>{user.user.phone} |<span>{user.user.email}</span> | <a href="">{user.user.website}</a></span>
         <a href="">www.linkedin.com</a>
         </div>
         <div>
             <p className="topic">SUMMARY</p>
             <hr/>
             <p className="text-muted">
+            {user.user.about}
              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.
             </p>
         </div>
         <div>
         <p className="topic">Education</p>
         <hr/>
+
+        {user.user.education.length > 0 && user.user.education.map((e:any)=>{
+            return <>
         <div className="d-flex justify-content-between">
-        <p>Bsc Computer Science at University of Nairobi</p>
-        <p>Feb 2023 - Feb 2024</p>
+        <p>{e.level} {e.field} at {e.school}</p>
+        <p>{new Date(e.startdate).toLocaleDateString('en-US', { month: 'long', year:'numeric', day:"2-digit" })} - {new Date(e.endate).toLocaleDateString('en-US', { month: 'long', year:'numeric', day:"2-digit" })}</p>
         </div>
         <p className="text-muted">
              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.
         </p>
+        </>
+        })}
+   
+
         </div>
 
         <div className="mt-2">
         <p className="topic">Experience</p>
         <hr/>
-        <div className="d-flex justify-content-between">
-        <p>Software Developer at Google</p>
-        <p>Jan 2022 - Jan 2023</p>
+        {user.user.experience.length > 0 && user.user.experience.map((e:any)=>{
+            return <> <div className="d-flex justify-content-between">
+        <p>{e.title} at {e.company}</p>
+        <p>{new Date(e.startdate).toLocaleDateString('en-US', { month: 'long', year:'numeric', day:"2-digit" })} - {new Date(e.endate).toLocaleDateString('en-US', { month: 'long', year:'numeric', day:"2-digit" })}</p>
         </div>
         <p className="text-muted">
-             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.
+          {e.description}   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.
         </p>
+            </>
+        })}
+    
         </div>
 
         <div className="mt-2">
         <p className="topic">Skills</p>
         <hr/> 
         <div className="d-flex flex-wrap justify-content-between w-50">
-        <span><i className="bi bi-dot"></i>React</span>
-        <span><i className="bi bi-dot"></i>NodeJs</span>
-        <span><i className="bi bi-dot"></i>ExpressJs</span>
-        <span><i className="bi bi-dot"></i>Mongodb</span>
+        {user.user.skills.length > 0 && user.user.skills.map((e:any)=>{
+            return <span key={e}><i className="bi bi-dot"></i>{e}</span>
+        })} 
         </div>
         </div>
 
         <div className="mt-3">
         <p className="topic">Certifications/Accomplishments</p>
         <hr/>
+        {user.user.certifications.length > 0 && user.user.certifications.map((e:any)=>{
+        return <>
         <div className="d-flex justify-content-between">
-        <p>AWS Cloud Solution Architect</p>
+        <p>{e.org} {e.certname}</p>
         <p>Feb 2024</p>
         </div>
         <p className="text-muted">
              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.
         </p>
+        </>
+        })}
+     
         </div>
         </div>
         </Container>
