@@ -2,19 +2,21 @@ import React, {useState} from "react"
 import { Row, Col, Button, Badge, Container } from "react-bootstrap"
 import { MyJobs } from "../../Employer";
 import AuthContent from "../../../context/AuthContext";
-// import { AuthContext } from "../../../context/AuthContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { Link } from "react-router-dom";
 interface CandidateDashboardProps {
     formik: any;
     expertise: string[];
     handleClick: any;
 }
 
-const CandidateDashboard: React.FC<CandidateDashboardProps> = ({ formik, expertise, handleClick }) => {    
+const CandidateDashboard: React.FC<CandidateDashboardProps> = ({handleClick }) => {    
   const [tab, setTab] = useState(1);
-  const fullname = localStorage.getItem('fullname');
+  const user = useSelector((state:RootState) => state.user)
    return <AuthContent>
     <div className="job-bg d-flex flex-column text-white text-center align-items-center justify-content-center">
-    <h2>{fullname}</h2>
+    <h2>{user.user.fullname}</h2>
     <p>JobNest // profile </p>
     </div>
     <Container fluid className="px-5 py-3">
@@ -29,34 +31,34 @@ const CandidateDashboard: React.FC<CandidateDashboardProps> = ({ formik, experti
           <div className="d-flex mb-3 justify-content-center gap-4 align-items-center">
             <div className="bg-white shadow-sm profile rounded-circle"></div>
              <div className="d-grid">
-             <span className="mt-2">{formik.values.fullname}</span>
-             <a href="" onClick={handleClick}>Update Profile</a>
+             <span className="mt-2">{user.user.fullname}</span>
+             <Button className="text-primary text-decoration-underline" variant="outline-none" onClick={handleClick}>Update Profile</Button>
              </div>
           </div>
           <div className="d-flex justify-content-between">
           <p className="text-muted">Email:</p>
-          <p>{formik.values.email}</p>
+          <p>{user.user.email}</p>
           </div>
           <hr></hr>
           <div className="d-flex justify-content-between">
           <p className="text-muted">Phone:</p>
-          <p>{formik.values.phone}</p>
+          <p>{user.user.phone}</p>
           </div>
           <hr></hr>
           <div className="d-flex justify-content-between">
           <p className="text-muted">Address:</p>
-          <p>{formik.values.address}</p>
+          <p>{user.user.address}</p>
           </div>
           <hr></hr>
           <div className="d-flex justify-content-between">
           <p className="text-muted">Website:</p>
-          <a href="">{formik.values.website}</a>
+          <a href="">{user.user.website}</a>
           </div>
           <hr></hr>
           <div>
             <p>Skills</p>
             <div className="d-flex flex-wrap gap-2">
-            {expertise.length > 0 && expertise?.map((e)=>{
+            {user.user.skills.length > 0 && user.user.skills?.map((e:any)=>{
                 return <Badge key={e} bg="success">{e}</Badge>
               })}
             </div>
@@ -66,7 +68,8 @@ const CandidateDashboard: React.FC<CandidateDashboardProps> = ({ formik, experti
         </Col>
         <Col sm={8}>
         <div className="d-flex justify-content-end">
-        <Button href="/resume" variant="success" className="">Generate CV</Button>
+        <Link to="/resume" className="bg-success rounded-2 text-white p-2 text-decoration-none button">Generate CV</Link>
+        {/* <Button href="/resume" variant="success" className="">Generate CV</Button> */}
         </div>
      
         <div>
@@ -81,15 +84,17 @@ const CandidateDashboard: React.FC<CandidateDashboardProps> = ({ formik, experti
             <div className="d-flex gap-2">
                     <span className="item p-3 rounded-circle d-flex text-center align-items-center justify-content-center border border-primary">
                     01</span>
-
-                    <div>
-                    <div>{formik.values.school}</div>
-                    {/* <span>Software engineering</span> */}
-                    <div>{formik.values.level} {formik.values.field} ({formik.values.startdate}-{formik.values.endate})</div>
-                    <div>Grade: {formik.values.grade}</div>
-                    <div className="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
-                    </div>
+                    {user.user.education.length > 0 && user.user.education.map((e:any)=>{
+                      return <div>
+                      <div>{e.school}</div>
+                      {/* <span>Software engineering</span> */}
+                      <div>{e.level} {e.field} ({new Date(e.startdate).toLocaleDateString('en-US', { month: 'long', year:'numeric', day:"2-digit" })} - {new Date(e.endate).toLocaleDateString('en-US', { month: 'long', year:'numeric', day:"2-digit" })})</div>
+                      <div>Grade: {e.grade}</div>
+                      <div className="text-muted">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
+                      </div>
+                    })}
+               
                     </div>
         </div>
 
@@ -98,15 +103,20 @@ const CandidateDashboard: React.FC<CandidateDashboardProps> = ({ formik, experti
             <div className="d-flex gap-2">
                     <span className="item p-3 rounded-circle d-flex text-center align-items-center justify-content-center border border-primary">
                     01</span>
+                    {user.user.experience.length > 0 && user.user.experience.map((e:any)=>{
+                          return    <div>
+                          <div>{e.company} - {e.type}</div>
+                          {/* <span>Software engineering</span> */}
+                          <div>
+                          {e.title} ({new Date(e.startdate).toLocaleDateString('en-US', { month: 'long', year:'numeric', day:"2-digit" })} - {new Date(e.endate).toLocaleDateString('en-US', { month: 'long', year:'numeric', day:"2-digit" })})
+                           </div>
 
-                    <div>
-                    <div>{formik.values.company} - {formik.values.type}</div>
-                    {/* <span>Software engineering</span> */}
-                    <div>{formik.values.title} ({formik.values.startdate2}-{formik.values.endate2})</div>
-                    <div>{formik.values.location}</div>
-                    <div className="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
-                    </div>
+                          <div>{e.location}</div>
+                          <div className="text-muted">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
+                          </div>
+                    })}
+                 
              </div>
         </div>
 
@@ -115,15 +125,17 @@ const CandidateDashboard: React.FC<CandidateDashboardProps> = ({ formik, experti
             <div className="d-flex gap-2">
                     <span className="item p-3 rounded-circle d-flex text-center align-items-center justify-content-center border border-primary">
                     01</span>
-
-                    <div>
-                    <div>{formik.values.certname}</div>
-                    {/* <span>Software engineering</span> */}
-                    <div>{formik.values.org}</div>
-                    <div>Credential ID: <span className="text-primary">{formik.values.cid}</span></div>
-                    <div className="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
-                    </div>
+                    {user.user.certifications.length > 0 && user.user.certifications.map((e:any)=>{
+                        return   <div>
+                        <div>{e.certname}</div>
+                        {/* <span>Software engineering</span> */}
+                        <div>{e.org}</div>
+                        <div>Credential ID: <span className="text-primary">{e.cid}</span></div>
+                        <div className="text-muted">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.</div>
+                        </div>
+                    })}
+                  
              </div>  
                    
         </div>

@@ -3,12 +3,14 @@ import { HomeWrapper } from "../../../wrapper"
 import { PostJob } from "../..";
 import { useState } from "react"
 import { Browse, MyJobs } from "../../Employer";
-
+import AuthContent from "../../../context/AuthContext";
 export default function EmployerDashboard(){
     const [tab, setTab] = useState(1);
+    const fullname = localStorage.getItem('fullname')
     return <HomeWrapper>
+    <AuthContent>
     <div className="job-bg d-flex flex-column text-white text-center align-items-center justify-content-center">
-    <h2>Rebecca Waweru</h2>
+    <h2>{fullname}</h2>
     <p>JobNest // Employer/Recruiter</p>
     </div>
     <Container className="px-5" fluid>
@@ -19,5 +21,6 @@ export default function EmployerDashboard(){
     </div>
     {tab === 1 ? <PostJob/> : tab === 2 ? <MyJobs/> : <Browse/>}
     </Container>
+    </AuthContent>
     </HomeWrapper>
 }
