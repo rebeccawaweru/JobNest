@@ -32,7 +32,7 @@ export default function Login(){
              localStorage.setItem('token', response.payload.token);
              localStorage.setItem('id', decode._id)
              dispatch(getUser(decode._id)).then(()=>{
-                if (response.payload.user.type === "candidate"){
+                if (response.payload.user.type === "candidate") {
                     navigate('/apply')
                 } else if (response.payload.user.type === "employer") {
                     navigate('/employer')

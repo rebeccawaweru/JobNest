@@ -14,7 +14,8 @@ const jobData = new Schema({
     currency: String,
     salary: String,
     deadline: String,
-    skills: [String]
+    skills: [String],
+    applications:[{}]
 });
 
 const Job = model('job', jobData);

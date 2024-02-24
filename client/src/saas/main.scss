@@ -135,7 +135,14 @@ h2 {
 .custom {
     border-right: none;
 }
-
+.side {
+    height: 100%;
+    width: 30%;
+    position: absolute;
+    right: 0;
+    z-index: 20;
+    cursor: pointer;
+}
 @mixin breakpoint($width){
    width: $width;
 

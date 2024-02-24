@@ -3,6 +3,7 @@ import client from "../api/client"
 
 export interface UserState {
     user:any,
+    users:Array<{}>,
     loading:boolean,
     success:boolean,
     error:boolean,
@@ -10,6 +11,7 @@ export interface UserState {
 }
 const initialState:UserState = {
     user:{},
+    users:[],
     loading:false,
     success:false,
     error:false,
@@ -23,7 +25,14 @@ export const login = createAsyncThunk('/users/login', async(values:any, {rejectW
         return rejectWithValue(error);
     }
 });
-
+export const getUsers = createAsyncThunk('/users', async(values:any, {rejectWithValue})=>{
+    try {
+        const response = await client.get('/users');
+        return response.data.users
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
 export const getUser = createAsyncThunk('/users/:id', async(id:string, {rejectWithValue})=>{
     try {
         const response = await client.get('/users/'+id);
@@ -31,7 +40,7 @@ export const getUser = createAsyncThunk('/users/:id', async(id:string, {rejectWi
     } catch (error) {
         return rejectWithValue(error);
     }
-})
+});
 export const updateUser = createAsyncThunk('/users/updateprofile', async({id,values}:any, {rejectWithValue}) => {
     try {
         const response = await client.put('/users/'+id, values)
@@ -60,10 +69,13 @@ export const userSlice = createSlice({
         });
         builder.addCase(getUser.pending, (state) =>{
             state.loading = true
-        })
+        });
         builder.addCase(getUser.fulfilled, (state, action) => {
             state.user = action.payload;
             state.loading = false
+        });
+        builder.addCase(getUsers.fulfilled, (state, action)=>{
+            state.users = action.payload
         });
       }
 })

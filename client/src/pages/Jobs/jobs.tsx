@@ -1,7 +1,16 @@
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Job } from "../../components";
 import {  HomeWrapper } from "../../wrapper";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { getJobs } from "../../reducers/jobSlice";
 export default function Jobs(){
+    const dispatch = useDispatch<AppDispatch>()
+    const {jobs} = useSelector((state:RootState)=>state.job);
+    useEffect(()=>{
+      dispatch(getJobs(''))
+    },[jobs])
     return (
     <HomeWrapper>
     <div className="job-bg d-flex flex-column text-white text-center align-items-center justify-content-center">
@@ -44,14 +53,10 @@ export default function Jobs(){
     <Button>Search</Button>
     </Col>
     <Col sm={8} xl={8} xxl={10} className="d-block flex-wrap d-xxl-flex" >
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
+    {jobs && jobs.length > 0 && jobs.map((job:any)=>{
+        return <Job _id={job._id} company={job.company} title={job.title} location2={job.location} skills={job.skills} currency={job.currency} salary={job.salary} deadline={job.deadline}/>
+    })}
+    <Job _id="1" company="Marketing Inc" title="Marketing Manager" location2="Houston, Texas" skills={['C++', 'Designer', 'Developer']} currency="$" salary={1000} deadline=''/>
     </Col>
     </Row>
     </Container>
