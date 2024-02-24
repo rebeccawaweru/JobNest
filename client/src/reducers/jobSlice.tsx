@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import client from "../api/client"
+import Swal from "sweetalert2"
 
 interface JobType {
     job:any,
@@ -27,16 +28,16 @@ export const newJob = createAsyncThunk('/jobs/new', async(values:any, {rejectWit
 export const getJob = createAsyncThunk('/jobs/:id', async(id:string, {rejectWithValue}) => {
     try {
        const response = await client.get('/jobs/'+id);
-       return response.data.job
+       return response.data
     } catch (error) {
         rejectWithValue(error)
     }
 });
 
-export const getJobs = createAsyncThunk('/jobs/find', async(values, {rejectWithValue}) => {
+export const getJobs = createAsyncThunk('/jobs/find', async(values:any, {rejectWithValue}) => {
     try {
-       const response = await client.get('/jobs');
-       return response.data.job
+       const response = await client.get('/jobs',values);
+       return response.data
     } catch (error) {
         rejectWithValue(error)
     }
@@ -97,6 +98,7 @@ export const jobSlice = createSlice({
        });
        builder.addCase(deleteJob.fulfilled, (state)=>{
         state.success = true
+        Swal.fire('Success', 'Job deleted successfully', "success")
        });
        builder.addCase(deleteJob.rejected, (state)=>{
         state.success = false

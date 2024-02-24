@@ -5,7 +5,7 @@ import requireAuth from '../middleware/requireAuth.js';
 
 
 // requires authentication for all job routes
-router.use(requireAuth)
+// router.use(requireAuth)
 
 //Create a job
 router.post('/jobs', createJob);

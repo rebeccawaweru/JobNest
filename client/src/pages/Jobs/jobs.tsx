@@ -9,7 +9,7 @@ export default function Jobs(){
     const dispatch = useDispatch<AppDispatch>()
     const {jobs} = useSelector((state:RootState)=>state.job);
     useEffect(()=>{
-      dispatch(getJobs())
+      dispatch(getJobs(''))
     },[jobs])
     return (
     <HomeWrapper>
@@ -53,17 +53,10 @@ export default function Jobs(){
     <Button>Search</Button>
     </Col>
     <Col sm={8} xl={8} xxl={10} className="d-block flex-wrap d-xxl-flex" >
-    {jobs && jobs.length > 0 && jobs.map((job)=>{
-        return <Job/>
+    {jobs && jobs.length > 0 && jobs.map((job:any)=>{
+        return <Job _id={job._id} company={job.company} title={job.title} location2={job.location} skills={job.skills} currency={job.currency} salary={job.salary} deadline={job.deadline}/>
     })}
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
-    <Job/>
+    <Job _id="1" company="Marketing Inc" title="Marketing Manager" location2="Houston, Texas" skills={['C++', 'Designer', 'Developer']} currency="$" salary={1000} deadline=''/>
     </Col>
     </Row>
     </Container>

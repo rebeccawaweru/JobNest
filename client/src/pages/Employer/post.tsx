@@ -21,13 +21,13 @@ export default function PostJob({user,handleClick}:propObjects){
     }
     const formik = useFormik({
         initialValues:{
-            poster:user.user._id,
+            poster:user._id,
             logo:"",
             company:"",
             title:"",
             category:"",
             location:"",
-            type:"",
+            type:"Full Time",
             about:"",
             education:"",
             responsibilities:"",
@@ -48,7 +48,7 @@ export default function PostJob({user,handleClick}:propObjects){
         }),
         onSubmit:async(values)=>{
             dispatch(newJob({...values, skills:skills})).then((response)=>{
-                if(response.payload.success){
+                if(response.payload){
                     Swal.fire('Success', 'Job created successfully', 'success')
                     handleClick()
                 }
