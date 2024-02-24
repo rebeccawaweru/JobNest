@@ -57,6 +57,7 @@ export default function UpdateProfile() {
             website:user.user.website,
             address:user.user.address,
             about:user.user.about,
+            tagline:"",
             school:"",
             level:"",
             field:"",
@@ -102,6 +103,7 @@ export default function UpdateProfile() {
                 address : values.address || user.user.address,
                 website : values.website || user.user.website,
                 about : values.about || user.user.about,
+                tagline: values.tagline || user.user.tagline,
                 education : [
                     {
                         school:values.school,

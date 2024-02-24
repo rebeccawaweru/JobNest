@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
 app.use(cors());
 
 app.use(express.json());
-app.use('/', jobRoutes);
+app.use('/server', jobRoutes);
 app.use('/server', router)
 
 app.use('/server/file', fileRoute);
