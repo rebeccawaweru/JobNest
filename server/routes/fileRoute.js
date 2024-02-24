@@ -1,10 +1,12 @@
 import express from 'express';
-import { uploadFile } from '../controllers/filesController';
+import { uploadFile } from '../controllers/filesController.js';
+import fs from 'fs';
 
 // router object
 const fileRoute = express.Router();
 
 // file upload route
-router.post('/upload', uploadFile)
+fileRoute.post('/upload', uploadFile)
+
 
 export default fileRoute
