@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from 'dotenv';
 import jobRoutes from './routes/jobsRoute.js';
 import router from './routes/user.js';
+import fileRoute from "./routes/fileRoute.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/server', jobRoutes);
 app.use('/server', router)
 
+app.use('/server/file', fileRoute);
 
 
 const CONNECTION_URL = process.env.MONGO
