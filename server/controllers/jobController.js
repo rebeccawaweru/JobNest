@@ -6,7 +6,9 @@ export const createJob = async (req, res) => {
     const job = new jobModel(req.body);
     const savedJob = await job.save();
     res.status(201).json(savedJob);
+    console.log(savedJob)
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: console.error(error) });
   }
 };
@@ -14,7 +16,7 @@ export const createJob = async (req, res) => {
 // Get all jobs
 export const getAllJobs = async (req, res) => {
   try {
-    const job = await jobModel.find();
+    const job = await jobModel.find()
     res.status(200).json(job);
   } catch (error) {
     res.status(500).json({ error: console.error(error) });

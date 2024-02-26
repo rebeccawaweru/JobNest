@@ -15,8 +15,13 @@ const jobData = new Schema({
     salary: String,
     deadline: String,
     skills: [String],
-    applications:[{}]
+    applications:[{}],
+    cv:String,
 });
+
+jobData.virtual('count').get(function() { 
+    return this.applications.length;
+})
 
 const Job = model('job', jobData);
 export default Job;
