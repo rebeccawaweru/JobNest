@@ -5,21 +5,26 @@ import cors from "cors";
 import dotenv from 'dotenv';
 import jobRoutes from './routes/jobsRoute.js';
 import router from './routes/user.js';
-
+import fileRoute from "./routes/fileRoute.js";
+import path from 'path'
+import { fileURLToPath } from 'url';
 dotenv.config();
 const app = express();
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // middleware
 // bodyParser helps to send POST requests
 
 app.use(bodyParser.json({ limit: "50mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true}));
 app.use(cors());
-
 app.use(express.json());
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use('/server', jobRoutes);
 app.use('/server', router)
 
+app.use('/server/file', fileRoute);
 
 
 const CONNECTION_URL = process.env.MONGO

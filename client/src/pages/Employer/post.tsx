@@ -1,4 +1,4 @@
-import { Badge, Button, Col, Form, Row } from "react-bootstrap";
+import { Badge, Button, Col, Form, Image, Row } from "react-bootstrap";
 import { CustomInput } from "../../components";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { newJob } from "../../reducers/jobSlice";
+import client from "../../api/client";
 import Swal from "sweetalert2";
 interface propObjects {
     user:any,
@@ -15,14 +16,35 @@ export default function PostJob({user,handleClick}:propObjects){
     const dispatch = useDispatch<AppDispatch>()
     const [skills, setSkills] = useState<string[]>([]);
     const [skill, setSkill] = useState('')
+    const [image,setImage] = useState('')
+    const [preview, setPreview] = useState('')
+
     const handleSkill = () =>{
          setSkills(prev => [...prev, skill])
          setSkill('')
     }
+
+    const onFileChange = (e:any) =>{
+        setImage(e.target.files[0])
+        console.log(e.target.files[0])
+        setPreview(URL.createObjectURL(e.target.files[0]));
+    }
+    const handleCancel = () =>{
+        setImage('')
+        setPreview('')
+    }
+    const handleUpload = () => {
+        return new Promise((resolve:any)=>{
+            const formData = new FormData()
+            formData.append("file", image)
+            client.post('/file/upload', formData).then((res)=>{
+                resolve(res.data.files)
+            })
+        })
+    }
+
     const formik = useFormik({
         initialValues:{
-            poster:user._id,
-            logo:"",
             company:"",
             title:"",
             category:"",
@@ -47,14 +69,12 @@ export default function PostJob({user,handleClick}:propObjects){
             deadline:Yup.string().required("Application deadline is required")
         }),
         onSubmit:async(values)=>{
-            dispatch(newJob({...values, skills:skills})).then((response)=>{
-                if(response.payload){
+            handleUpload().then((value:any)=>{
+                dispatch(newJob({...values, skills:skills, poster:user._id, logo:value})).then(()=>{
                     Swal.fire('Success', 'Job created successfully', 'success')
                     handleClick()
-                }
-                
+                })
             })
-        //   console.log(values, skills)
         }
     })
     return <div className="bg-white rounded-2 p-5 shadow-sm">
@@ -62,7 +82,13 @@ export default function PostJob({user,handleClick}:propObjects){
         event.preventDefault();
         formik.handleSubmit(event);
     }}>
-    <CustomInput type="file" label="Company logo"/>
+    {preview ?
+    <div className="d-flex">
+   <Image src={preview} alt="company logo" className="w-25 h-25 rounded-circle"/>
+   <i className="bi bi-x text-danger fs-3" onClick={handleCancel}></i>
+   </div>
+ : null}
+    <CustomInput onChange={onFileChange} type="file" label="Company logo"/>
     <CustomInput isValid={formik.touched.company && !formik.errors.company} isInvalid={!!formik.errors.company && formik.touched.company} errormessage={formik.touched.company && formik.errors.company} {...formik.getFieldProps("company")} label="Company Name *"/>
     <CustomInput isValid={formik.touched.title && !formik.errors.title} isInvalid={!!formik.errors.title && formik.touched.title} errormessage={formik.touched.title && formik.errors.title}  {...formik.getFieldProps("title")} label="Job Title *"/>
     <span className="text-secondary fs-6">Category *</span>
