@@ -53,10 +53,11 @@ export default function Jobs(){
     <Button>Search</Button>
     </Col>
     <Col sm={8} xl={8} xxl={10} className="d-block flex-wrap d-xxl-flex" >
-    {jobs && jobs.length > 0 && jobs.map((job:any)=>{
-        return <Job _id={job._id} company={job.company} title={job.title} location2={job.location} skills={job.skills} currency={job.currency} salary={job.salary} deadline={job.deadline}/>
-    })}
-    <Job _id="1" company="Marketing Inc" title="Marketing Manager" location2="Houston, Texas" skills={['C++', 'Designer', 'Developer']} currency="$" salary={1000} deadline=''/>
+    {(jobs && jobs.length > 0) ? jobs.map((job:any)=>{
+        return <Job count={job.count} logo={job.logo} _id={job._id} company={job.company} title={job.title} location2={job.location} skills={job.skills} currency={job.currency} salary={job.salary} deadline={job.deadline}/>
+    }): <p>No jobs posted</p>}
+
+    {/* <Job _id="1" company="Marketing Inc" title="Marketing Manager" location2="Houston, Texas" skills={['C++', 'Designer', 'Developer']} currency="$" salary={1000} deadline=''/> */}
     </Col>
     </Row>
     </Container>

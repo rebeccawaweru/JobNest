@@ -56,7 +56,7 @@ export default function UpdateProfile() {
             phone:user.user.phone,
             website:user.user.website,
             address:user.user.address,
-            about:user.user.about,
+            about:user.user.about || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod',
             tagline:"",
             school:"",
             level:"",
@@ -69,7 +69,7 @@ export default function UpdateProfile() {
             title:"",
             location:"",
             type:"Full Time",
-            description:"",
+            description:" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod.",
             startdate2:"",
             endate2:"",
             skills:"",
@@ -152,7 +152,8 @@ export default function UpdateProfile() {
     }
 
     return <FormContext.Provider value={{ formik, skills }}><HomeWrapper>
-     {updated ? <CandidateDashboard formik={formik} expertise={expertise} handleClick={()=>setUpdated(false)}/> :
+     {updated ? <CandidateDashboard formik={formik} expertise={expertise} handleClick={()=>{setUpdated(false),
+     dispatch({type:'Reset'})}}/> :
     <Container className="px-5 py-3" fluid>
     <div className="bg-white rounded-2 p-5 shadow-sm">
     <h4 className="text-primary">Update Your Profile</h4>
@@ -173,8 +174,8 @@ export default function UpdateProfile() {
     {state.count === 3 && <Experience/>}
     {state.count === 4 && <Skills handleClick={handleClick}/>}
     <div className="d-flex justify-content-end my-2 gap-3">
-        <Button onClick={()=>dispatch({type:"Prev"})} disabled={state.count === 1}><i className="bi bi-chevron-double-left"></i>Prev</Button>
-        {state.count < 4 ? <Button type="button" onClick={()=>dispatch({type:"Next"})}>Next<i className="bi bi-chevron-double-right"></i></Button> 
+        <p className="bg-primary text-white px-2 py-2 rounded-2"  onClick={()=>dispatch({type:"Prev"})}><i className="bi bi-chevron-double-left"></i>Prev</p>
+        {state.count < 4 ? <p className="bg-primary text-white px-2 py-2 rounded-2" onClick={()=>dispatch({type:"Next"})}>Next<i className="bi bi-chevron-double-right"></i></p> 
         :<Button type="submit" variant="success">Finish<i className="bi bi-chevron-double-right"></i></Button>}
     </div>
     </Form>
