@@ -1,8 +1,7 @@
-// contains email and password field
-
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import validator from 'validator';
+
 
 const Schema = mongoose.Schema
 
@@ -21,7 +20,8 @@ const userSchema = new Schema({
   experience : { type: Array },
   skills : { type: Array },
   certifications : { type: Array },
-  updated : { type: Boolean }
+  updated : { type: Boolean },
+  verified: { type: Boolean, default: false }
 
 })
 
