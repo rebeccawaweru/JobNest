@@ -17,8 +17,8 @@ import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import client from "../../api/client";
-const pdfjs = await import('pdfjs-dist/build/pdf');
-const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
+const pdfjs:any = await import('pdfjs-dist/build/pdf');
+const pdfjsWorker:any = await import('pdfjs-dist/build/pdf.worker.entry');
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 interface UserType {
