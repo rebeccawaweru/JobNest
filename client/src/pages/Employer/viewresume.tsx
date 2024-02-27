@@ -2,13 +2,25 @@ import { Container } from "react-bootstrap";
 import { HomeWrapper } from "../../wrapper";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getUser } from "../../reducers/userSlice";
 import { getJob } from "../../reducers/jobSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
+import { CheckApp } from "../../utils/helpers";
 import { baseURL } from "../../utils/helpers";
-import { Document, pdfjs } from 'react-pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// Core viewer
+import { Viewer } from '@react-pdf-viewer/core';
+
+// Plugins
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+
+// Import styles
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import client from "../../api/client";
+const pdfjs = await import('pdfjs-dist/build/pdf');
+const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
+
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 interface UserType {
     fullname:string,
     phone:string,
@@ -21,30 +33,53 @@ interface UserType {
     certifications:Array<{}>,
 }
 export default function ViewResume(){
+    const defaultLayoutPluginInstance = defaultLayoutPlugin();
     const location = useLocation();
     const dispatch = useDispatch<AppDispatch>()
     const searchParams = new URLSearchParams(location.search);
     const userId:any = searchParams.get('user');
     const jobId:any = searchParams.get('job');
-    const {user} = useSelector((state:RootState)=>state.user);
+    const [statusCV, setStatusCV] = useState(false);
+    // const {user} = useSelector((state:RootState)=>state.user);
     const {job} = useSelector((state:RootState)=>state.job)
-    const [userData, setUserData] = useState<UserType>({})
+    const initialUserData: UserType = {
+    fullname: '',
+    phone: '',
+    about: '',
+    email: '',
+    website: '',
+    education: [],
+    skills: [],
+    experience: [],
+    certifications: [],
+};
+    const [userData, setUserData] = useState<UserType>(initialUserData)
     const [file, setFile] = useState('')
     useEffect(()=>{
-        dispatch(getUser(userId)).then((res)=>{
-            setUserData(res.payload)
+        client.get('/users/'+userId).then((res)=>{
+            setUserData(res.data.user)
         })
         dispatch(getJob(jobId)).then((res)=>{
-            console.log(res.payload.applications)
-             const z = job.applications.filter(function(j:any){
+            console.log(res)
+             const z = res.payload.applications.filter(function(j:any){
                 return j.id === userId
              })
+             setStatusCV(CheckApp(z[0].name))
              setFile(baseURL+z[0].name)
+             console.log(z)
         })
     },[userId,jobId])
     return (
      <HomeWrapper>
      <Container id="pdf-content" className="border border-1 rounded-3 p-4 d-grid gap-3">
+        {file && statusCV ?
+        <Viewer
+        fileUrl={file}
+        plugins={[
+            // Register plugins
+            defaultLayoutPluginInstance,
+        ]}
+       /> :
         <div>
         <div className="text-center d-grid">
         <span>{userData.fullname}</span>
@@ -121,10 +156,8 @@ export default function ViewResume(){
      
         </div>
         </div>
-
-        <Document file={file}/>
-        </Container>
-  
+        }
+  </Container>
      </HomeWrapper>
     )
 }

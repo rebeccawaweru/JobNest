@@ -15,9 +15,9 @@ export default function Contact(){
     </div>
     <hr className="w-75"></hr>
     <div className="d-grid gap-3">
-    <ContactItem icon="bi bi-geo-alt-fill" title="Head Office" desc="Jalan Cempaka Wangi No 22" desc2="Jakarta - Indonesia"/>   
+    <ContactItem icon="bi bi-geo-alt-fill" title="Head Office" desc="CBD Building No 22" desc2="Nairobi - Kenya"/>   
     <ContactItem icon="bi bi-envelope-fill" title="Email Us" desc="support@jobnest.com" desc2="info@jobnest.com"/>
-    <ContactItem icon="bi bi-telephone-fill" title="Call Us" desc="Phone : +6221.2002.2012" desc2="Fax : +6221.2002.2013"/>      
+    <ContactItem icon="bi bi-telephone-fill" title="Call Us" desc="Phone : +254 700 000 000" desc2="Fax : +254 700 000 000"/>      
     </div>
     </Col>
     <Col className="bg-light p-5 rounded-3">

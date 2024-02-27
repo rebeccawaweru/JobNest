@@ -10,7 +10,7 @@ export default function BasicInfo() {
         <CustomInput {...formik?.formik.getFieldProps('email')} label="Email *"/>
         <CustomInput {...formik?.formik.getFieldProps('phone')} isValid={formik?.formik.touched.phone && !formik?.formik.errors.phone} isInvalid={!!formik?.formik.errors.phone && formik.formik.touched.phone} errormessage={formik?.formik.touched.phone && formik?.formik.errors.phone} label="Phone *"/>
         <CustomInput {...formik?.formik.getFieldProps('address')} isValid={formik?.formik.touched.address && !formik?.formik.errors.address} isInvalid={!!formik?.formik.errors.address && formik.formik.touched.address} errormessage={formik?.formik.touched.address && formik?.formik.errors.address} label="Address *"/>
-        <CustomInput placeholder="e.g Software Developer, Teacher, Designer" {...formik?.formik.getFieldProps('tagline')}  label="Tag Line *"/>
+        <CustomInput {...formik?.formik.getFieldProps('tagline')}  label="Tag Line *"/>
         <CustomInput {...formik?.formik.getFieldProps('website')} label="Website e.g. portfolio, github, linkedin"/>
         <CustomInput {...formik?.formik.getFieldProps('about')} isValid={formik?.formik.touched.about && !formik?.formik.errors.about} isInvalid={!!formik?.formik.errors.about && formik.formik.touched.about} errormessage={formik?.formik.touched.about && formik?.formik.errors.about} label="About *" as="textarea" placeholder="write a brief description about yourself..." rows={5}/>
         </div>   

@@ -179,9 +179,9 @@ export default function Job(props:JobType){
          {current !== '/jobs/details' ?
          <Link onClick={handleClick} to="/jobs/details" className="rounded-pill bg-primary text-decoration-none text-white  px-3 py-2 button">Open</Link>
          : null}
-        {((current === '/employer' || current === '/jobs/details') && user.type === "employer") ?  <Button onClick={handleSide} variant="success" className="rounded-pill">Applications ({count})</Button> :
+        {(user.type === "employer") ?  <Button onClick={handleSide} variant="success" className="rounded-pill">Applications ({count})</Button> :
         (current !== '/apply' && user.type === 'candidate') ?  <Button onClick={handleApply} variant="success" className="rounded-pill px-4 button">Apply</Button> 
-        : null }
+        :  (current !== '/apply' && user.type === 'employer') ? null : ''  }
         </Stack>
         
          </div>

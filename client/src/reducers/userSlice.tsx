@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import client from "../api/client"
+import Swal from "sweetalert2";
 
 export interface UserState {
     user:any,
@@ -59,10 +60,14 @@ export const userSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(login.fulfilled, (state) => {
-        //   state.user = action.payload;
+        builder.addCase(login.fulfilled, (state, action) => {
+          state.user = action.payload;
           state.loggedIn = true
         });
+        builder.addCase(login.rejected, (state,action:any) =>{
+           state.error = true
+           Swal.fire('Error', action.payload.message, 'error')
+        })
         builder.addCase(updateUser.fulfilled, (state, action) => {
            state.success = true
            state.user = action.payload

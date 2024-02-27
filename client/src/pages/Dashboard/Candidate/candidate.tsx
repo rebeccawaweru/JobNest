@@ -1,19 +1,26 @@
-import React, {useState} from "react"
+import React, {useState,useEffect} from "react"
 import { Row, Col, Button, Badge, Container } from "react-bootstrap"
 import { MyJobs } from "../../Employer";
 import AuthContent from "../../../context/AuthContext";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import {  useSelector, useDispatch} from "react-redux";
+import {  AppDispatch, RootState } from "../../../store";
 import { Link } from "react-router-dom";
+import { getUser } from "../../../reducers/userSlice";
 interface CandidateDashboardProps {
     formik: any;
     expertise: string[];
     handleClick: any;
+    updated:boolean
 }
 
-const CandidateDashboard: React.FC<CandidateDashboardProps> = ({handleClick }) => {    
+const CandidateDashboard: React.FC<CandidateDashboardProps> = ({handleClick,updated }) => {    
   const [tab, setTab] = useState(1);
+  const dispatch = useDispatch<AppDispatch>()
   const user = useSelector((state:RootState) => state.user)
+  const id:any = localStorage.getItem('id')
+  useEffect(()=>{
+    dispatch(getUser(id));
+  },[updated])
    return <AuthContent>
     <div className="job-bg d-flex flex-column text-white text-center align-items-center justify-content-center">
     <h2>{user.user.fullname}</h2>
@@ -32,6 +39,7 @@ const CandidateDashboard: React.FC<CandidateDashboardProps> = ({handleClick }) =
             <div className="bg-white shadow-sm profile rounded-circle"></div>
              <div className="d-grid">
              <span className="mt-2">{user.user.fullname}</span>
+             <span className="text-muted fw-bold">{user.user.tagline}</span>
              <Button className="text-primary text-decoration-underline" variant="outline-none" onClick={handleClick}>Update Profile</Button>
              </div>
           </div>

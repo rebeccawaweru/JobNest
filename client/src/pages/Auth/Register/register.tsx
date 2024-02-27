@@ -31,10 +31,12 @@ export default function Register(){
             console.log(values)
             await client.post('/user/register', values).then((response)=>{
                if(response.data.token){
-                Swal.fire('Success', 'Signup successfull', 'success')
+                Swal.fire('Activate your account', response.data.message, 'success')
                 navigate('/login')
                }
             
+            }).catch((error)=>{
+                Swal.fire('Error', error.message, 'error')
             })
         }
     })

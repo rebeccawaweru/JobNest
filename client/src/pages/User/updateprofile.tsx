@@ -9,8 +9,8 @@ import { CandidateDashboard } from "..";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import Swal from "sweetalert2";
-// import { updateUser } from "../../reducers/userSlice";
 import client from "../../api/client";
+
 
 interface FormContextType {
     formik: ReturnType<typeof useFormik>;
@@ -57,7 +57,7 @@ export default function UpdateProfile() {
             website:user.user.website,
             address:user.user.address,
             about:user.user.about || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut congue felis. Etiam ac felis at lorem accumsan iaculis at ut est. Phasellus auctor tortor et condimentum euismod',
-            tagline:"",
+            tagline:user.user.tagline,
             school:"",
             level:"",
             field:"",
@@ -79,20 +79,21 @@ export default function UpdateProfile() {
             cid:""
         },
         validationSchema:Yup.object({
-            // phone:Yup.string().required("Phone number is required"),
-            // address:Yup.string().required("Address is required"),
-            // about:Yup.string().required("Short description about yourself is required"),
-            // school:Yup.string().required("School is required"),
-            // level:Yup.string().required("Level/Degree is required"),
-            // field:Yup.string().required("Field of study is required"),
-            // startdate:Yup.string().required("Start Date is required"),
-            // endate:Yup.string().required("End Date is required"),
-            // company:Yup.string().required("Company is required"),
-            // industry:Yup.string().required("Industry is required"),
-            // title:Yup.string().required("Job title is required"),
-            // location:Yup.string().required("Location is required"),
-            // startdate2:Yup.string().required("Start Date is required"),
-            // endate2:Yup.string().required("End Date is required"),
+            phone:Yup.string().required("Phone number is required"),
+            address:Yup.string().required("Address is required"),
+            tagline:Yup.string().required("Please add tagline to your bio"),
+            about:Yup.string().required("Short description about yourself is required"),
+            school:Yup.string().required("School is required"),
+            level:Yup.string().required("Level/Degree is required"),
+            field:Yup.string().required("Field of study is required"),
+            startdate:Yup.string().required("Start Date is required"),
+            endate:Yup.string().required("End Date is required"),
+            company:Yup.string().required("Company is required"),
+            industry:Yup.string().required("Industry is required"),
+            title:Yup.string().required("Job title is required"),
+            location:Yup.string().required("Location is required"),
+            startdate2:Yup.string().required("Start Date is required"),
+            endate2:Yup.string().required("End Date is required"),
         }),
         onSubmit:async(values)=>{
             // dispatch(updateUser({id:user.user.user._id, ...values}, ))
@@ -134,9 +135,11 @@ export default function UpdateProfile() {
                     }
                 ] || user.user.certifications,
                 updated : true
-            }).then((response)=>{
-                console.log(response.data)
-                setUpdated(true)
+            }).then(()=>{
+               
+                    setUpdated(true)
+           
+             
                 Swal.fire('Success', 'Profile Updated Successfully', 'success')
             }).catch((err)=>{
                 console.log(err)
@@ -151,8 +154,9 @@ export default function UpdateProfile() {
         formik.setFieldValue('skills', '')
     }
 
+
     return <FormContext.Provider value={{ formik, skills }}><HomeWrapper>
-     {updated ? <CandidateDashboard formik={formik} expertise={expertise} handleClick={()=>{setUpdated(false),
+     {updated ? <CandidateDashboard updated={updated} formik={formik} expertise={expertise} handleClick={()=>{setUpdated(false),
      dispatch({type:'Reset'})}}/> :
     <Container className="px-5 py-3" fluid>
     <div className="bg-white rounded-2 p-5 shadow-sm">
@@ -174,9 +178,9 @@ export default function UpdateProfile() {
     {state.count === 3 && <Experience/>}
     {state.count === 4 && <Skills handleClick={handleClick}/>}
     <div className="d-flex justify-content-end my-2 gap-3">
-        <p className="bg-primary text-white px-2 py-2 rounded-2"  onClick={()=>dispatch({type:"Prev"})}><i className="bi bi-chevron-double-left"></i>Prev</p>
-        {state.count < 4 ? <p className="bg-primary text-white px-2 py-2 rounded-2" onClick={()=>dispatch({type:"Next"})}>Next<i className="bi bi-chevron-double-right"></i></p> 
-        :<Button type="submit" variant="success">Finish<i className="bi bi-chevron-double-right"></i></Button>}
+        <p className="bg-primary text-white px-2 py-2 rounded-2 cursor"  onClick={()=>dispatch({type:"Prev"})}><i className="bi bi-chevron-double-left"></i>Prev</p>
+        {state.count < 4 ? <p className="bg-primary cursor text-white px-2 py-2 rounded-2" onClick={()=>dispatch({type:"Next"})}>Next<i className="bi bi-chevron-double-right"></i></p> 
+        :<Button  type="submit" variant="success">Finish<i className="bi bi-chevron-double-right"></i></Button>}
     </div>
     </Form>
     </div>
