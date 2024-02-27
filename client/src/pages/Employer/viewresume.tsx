@@ -3,8 +3,8 @@ import { HomeWrapper } from "../../wrapper";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getJob } from "../../reducers/jobSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { useDispatch} from "react-redux";
+import { AppDispatch} from "../../store";
 import { CheckApp } from "../../utils/helpers";
 import { baseURL } from "../../utils/helpers";
 // Core viewer
@@ -40,8 +40,6 @@ export default function ViewResume(){
     const userId:any = searchParams.get('user');
     const jobId:any = searchParams.get('job');
     const [statusCV, setStatusCV] = useState(false);
-    // const {user} = useSelector((state:RootState)=>state.user);
-    const {job} = useSelector((state:RootState)=>state.job)
     const initialUserData: UserType = {
     fullname: '',
     phone: '',
