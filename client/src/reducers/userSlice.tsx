@@ -28,7 +28,7 @@ export const login = createAsyncThunk('/users/login', async(values:any, {rejectW
 });
 export const getUsers = createAsyncThunk('/users', async(values:any, {rejectWithValue})=>{
     try {
-        const response = await client.get('/users');
+        const response = await client.get('/users', values);
         return response.data.users
     } catch (error) {
         return rejectWithValue(error);

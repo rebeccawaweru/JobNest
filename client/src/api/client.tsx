@@ -1,2 +1,2 @@
 import axios from "axios";
-export default axios.create({baseURL:"http://localhost:5001/server"})
+export default axios.create({baseURL:"https://jobnest-xmzd.onrender.com/server"})
