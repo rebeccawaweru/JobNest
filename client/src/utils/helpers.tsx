@@ -16,3 +16,8 @@ export const generatePDF = () => {
   ;
 }
 export const baseURL = 'http://localhost:5001/'
+
+export const CheckApp = (myString: string) => {
+const endsWithPDF: boolean = /\.pdf$/.test(myString);
+return endsWithPDF;
+}
