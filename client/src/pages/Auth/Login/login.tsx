@@ -28,8 +28,8 @@ export default function Login(){
         }),
         onSubmit:async(values) =>{
           dispatch(login({...values})).then((response)=>{
-             const decode:DecodeType = jwtDecode(response.payload.token)
-             localStorage.setItem('token', response.payload.token);
+             const decode:DecodeType = jwtDecode(response.payload.userToken)
+             localStorage.setItem('token', response.payload.userToken);
              localStorage.setItem('id', decode._id)
              dispatch(getUser(decode._id)).then(()=>{
                 if (response.payload.user.type === "candidate") {
