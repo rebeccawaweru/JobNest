@@ -17,7 +17,7 @@ export const generatePDF = () => {
     })
   ;
 }
-export const baseURL = 'http://localhost:5001/'
+export const baseURL = 'https://jobnest-xmzd.onrender.com/'
 
 export const CheckApp = (myString: string) => {
 const endsWithPDF: boolean = /\.pdf$/.test(myString);

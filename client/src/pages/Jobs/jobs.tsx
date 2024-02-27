@@ -49,11 +49,11 @@ export default function Jobs(){
     <span className="topic">Tags</span>
     <Form.Check value="C++" label="C++" onChange={handleCheckboxChange}/>
     <Form.Check value="Creative" label="Creative" onChange={handleCheckboxChange}/>
-    <Form.Check value="Designer" label="Designer" onChange={handleCheckboxChange}/>
-    <Form.Check value="Developer" label="Developer" onChange={handleCheckboxChange}/>
-    <Form.Check value="Full Time" label="Full Time" onChange={handleCheckboxChange}/>
+    <Form.Check value="UI/UX" label="UI/UX" onChange={handleCheckboxChange}/>
+    <Form.Check value="Java" label="Java" onChange={handleCheckboxChange}/>
+    <Form.Check value="MERN" label="MERN" onChange={handleCheckboxChange}/>
     <Form.Check value="Javascript" label="Javascript" onChange={handleCheckboxChange}/>
-    <Form.Check value="Remote" label="Remote" onChange={handleCheckboxChange}/>
+    <Form.Check value="Python" label="Python" onChange={handleCheckboxChange}/>
     <span className="topic">Locations</span>
     <Form.Check value="Remote" label="Remote" onChange={handleCheckboxChange}/>
     <Form.Check value="Nairobi" label="Nairobi" onChange={handleCheckboxChange}/>

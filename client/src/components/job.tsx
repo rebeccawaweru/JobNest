@@ -7,6 +7,7 @@ import { getJob, deleteJob, getJobs, updateJob } from "../reducers/jobSlice";
 import Swal from "sweetalert2";
 import { baseURL } from "../utils/helpers";
 import client from "../api/client";
+
 interface JobType {
     count?:number,
     logo:string,

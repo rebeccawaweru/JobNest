@@ -1,12 +1,14 @@
 import { Button, Container, Form, Row, Col} from "react-bootstrap";
 import { AuthWrapper } from "../../../wrapper";
-import { Input} from "../../../components";
+import { Input, CustomLoader} from "../../../components";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import client from "../../../api/client";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 export default function Register(){
+    const [loading,isLoading] = useState<boolean>(false)
     const navigate = useNavigate()
     const formik = useFormik({
         initialValues:{
@@ -28,16 +30,17 @@ export default function Register(){
            confirmpassword:Yup.string().equals([Yup.ref('password'), null], "Passwords do not match!").required("Please confirm your password")
         }),
         onSubmit:async(values) => {
-            console.log(values)
-            await client.post('/user/register', values).then((response)=>{
-               if(response.data.token){
+        isLoading(true)
+            await client.post('/user/register', values).then((response) => {
+               if (response.data.token) {
                 Swal.fire('Activate your account', response.data.message, 'success')
                 navigate('/login')
-               }
+                 }
             
             }).catch((error)=>{
                 Swal.fire('Error', error.message, 'error')
             })
+            isLoading(false)
         }
     })
     return (
@@ -72,7 +75,8 @@ export default function Register(){
     <Form.Check defaultChecked label="I have read & accept the Terms & Conditions"/>
     <a href="/login" className="">Already have account?</a>
     </div> 
-    <Button type="submit" variant="primary rounded-pill px-3 button mt-4">Register</Button>
+    {loading ? <CustomLoader/> :
+    <Button disabled={loading} type="submit" variant="primary rounded-pill px-3 button mt-4">Register</Button>}
     </Col>
     </Row>
     </Form>

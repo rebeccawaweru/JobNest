@@ -1,5 +1,5 @@
 import { Badge, Button, Col, Form, Image, Row } from "react-bootstrap";
-import { CustomInput } from "../../components";
+import { CustomInput, CustomLoader } from "../../components";
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from 'yup';
@@ -18,7 +18,7 @@ export default function PostJob({user,handleClick}:propObjects){
     const [skill, setSkill] = useState('')
     const [image,setImage] = useState('')
     const [preview, setPreview] = useState('')
-
+    const [loading, isLoading] = useState<boolean>()
     const handleSkill = () =>{
          setSkills(prev => [...prev, skill])
          setSkill('')
@@ -69,12 +69,15 @@ export default function PostJob({user,handleClick}:propObjects){
             deadline:Yup.string().required("Application deadline is required")
         }),
         onSubmit:async(values)=>{
-            handleUpload().then((value:any)=>{
+            isLoading(true)
+            await handleUpload().then((value:any)=>{
                 dispatch(newJob({...values, skills:skills, poster:user._id, logo:value})).then(()=>{
+                    isLoading(false)
                     Swal.fire('Success', 'Job created successfully', 'success')
                     handleClick()
                 })
             })
+         
         }
     })
     return <div className="bg-white rounded-2 p-5 shadow-sm">
@@ -142,12 +145,12 @@ export default function PostJob({user,handleClick}:propObjects){
             return <Badge key={s} bg="success">{s}</Badge>
         })}
         </div>
-      
         <CustomInput isValid={formik.touched.about && !formik.errors.about} isInvalid={!!formik.errors.about && formik.touched.about} errormessage={formik.touched.about && formik.errors.about}  {...formik.getFieldProps("about")} label="About *" as="textarea" rows={8}/>
         <CustomInput isValid={formik.touched.education && !formik.errors.education} isInvalid={!!formik.errors.education && formik.touched.education} errormessage={formik.touched.education && formik.errors.education}  {...formik.getFieldProps("education")} label="Education & Experience *" as="textarea" rows={8}/>
         <CustomInput isValid={formik.touched.responsibilities && !formik.errors.responsibilities} isInvalid={!!formik.errors.responsibilities && formik.touched.responsibilities} errormessage={formik.touched.responsibilities && formik.errors.responsibilities}  {...formik.getFieldProps("responsibilities")} label="Responsibilities *" as="textarea" rows={8}/>
         <CustomInput isValid={formik.touched.deadline && !formik.errors.deadline} isInvalid={!!formik.errors.deadline && formik.touched.deadline} errormessage={formik.touched.deadline && formik.errors.deadline}  {...formik.getFieldProps("deadline")} type="date" label="Deadline *"/>
-       <Button type="submit">Submit</Button>
+        {loading ? <CustomLoader/> :
+        <Button disabled={loading} type="submit">Submit</Button>}
     </Form>
     </div> 
 }
