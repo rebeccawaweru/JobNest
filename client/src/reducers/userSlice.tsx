@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import client from "../api/client"
+import client from "../api/client";
 import Swal from "sweetalert2";
 
 export interface UserState {
