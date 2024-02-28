@@ -1,6 +1,6 @@
 import { AuthWrapper } from "../../../wrapper";
 import { Container, Form, Col, Row, Button} from "react-bootstrap";
-import { Input } from "../../../components";
+import { Input, CustomLoader } from "../../../components";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { login,getUser } from "../../../reducers/userSlice";
 import { AppDispatch } from "../../../store";
 import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
+import { useState } from "react";
 
 interface DecodeType {
     _id:string
@@ -17,6 +18,7 @@ interface DecodeType {
 export default function Login(){
     const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
+    const [loading,isLoading] = useState<boolean>(false)
     const formik = useFormik({
         initialValues:{
             username:"",
@@ -27,18 +29,24 @@ export default function Login(){
             password:Yup.string().trim().min(6, "Password should contain 6 or more characters").required("Password is required"),
         }),
         onSubmit:async(values) =>{
+          isLoading(true)
           dispatch(login({...values})).then((response)=>{
+          
              const decode:DecodeType = jwtDecode(response.payload.userToken)
              localStorage.setItem('token', response.payload.userToken);
              localStorage.setItem('id', decode._id)
              dispatch(getUser(decode._id)).then(()=>{
+             
                 if (response.payload.user.type === "candidate") {
                     navigate('/apply')
                 } else if (response.payload.user.type === "employer") {
                     navigate('/employer')
                 }
              })
+             isLoading(false)
           })
+    
+      
             // await client.post('/user/login', values).then((response)=>{
             // if (response.data.token){
        
@@ -64,10 +72,11 @@ export default function Login(){
     <Form.Check defaultChecked label="Remember Me"/>
     <a href="/login" className="text-primary">Forgot Password?</a>
     </div>
+    {loading ? <CustomLoader/> :
     <div className="d-flex gap-2 mt-4">
-    <Button type="submit"  className="rounded-pill px-3 button">Login</Button>
+   <Button disabled={loading} type="submit"  className="rounded-pill px-3 button">Login</Button>
     <Button href="/register" variant="success" className="rounded-pill px-2 button">Register</Button>
-    </div>
+    </div>}
     </Col>
     </Row>
     </Form>
